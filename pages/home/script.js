@@ -48,6 +48,12 @@ function updateFriend(filename='friend-idle.svg'){
    setTimeout(()=>els.friend?.classList.remove('is-changing'),180);
  },70);
 }
+function nudgeComposerCta(){
+ if(!els.friendCta || matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+ els.friendCta.classList.remove('is-nudging');
+ void els.friendCta.offsetWidth;
+ els.friendCta.classList.add('is-nudging');
+}
 function selectCategory(id){
  selected=fixedCategories.find(cat=>cat.id===id)||null;
  if(!selected)return;
@@ -59,6 +65,7 @@ function selectCategory(id){
  els.card.classList.add('is-ready');
  els.card.setAttribute('aria-label',`${selected.name}으로 기록하기`);
  updateFriend(selected.friend);
+ nudgeComposerCta();
  renderCategories();
 }
 function startEditor(){

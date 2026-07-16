@@ -793,6 +793,13 @@ svg{display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:
   outline-offset:5px;
   border-radius:8px;
 }
+.composer-card-cta.is-nudging{
+  animation:composer-cta-nudge .8s ease-out 1;
+}
+@keyframes composer-cta-nudge{
+  0%,100%{transform:scale(1)}
+  42%{transform:scale(1.03)}
+}
 .composer-card-friend{
   position:absolute;
   right:18px;
