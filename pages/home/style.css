@@ -1326,26 +1326,28 @@ svg{display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:
   padding:0 12px !important;
   flex-direction:row !important;
   gap:6px !important;
-  border-color:rgba(208,216,209,.72) !important;
-  background:rgba(255,255,255,.62) !important;
+  border:0 !important;
+  background:var(--cat-soft) !important;
   box-shadow:none !important;
   color:#4E5866 !important;
   font-size:13.5px !important;
   font-weight:520 !important;
   letter-spacing:-.025em !important;
+  opacity:.86;
   scroll-snap-align:start;
 }
 .category-chip .category-icon{
   width:15px !important;
   height:15px !important;
+  color:var(--cat-color) !important;
 }
 .category-chip.selected{
   background:var(--cat-soft) !important;
-  border-color:color-mix(in srgb,var(--cat-color) 24%, #fff) !important;
   color:var(--cat-color) !important;
   font-weight:600 !important;
+  opacity:1;
   transform:none !important;
-  box-shadow:0 3px 10px color-mix(in srgb,var(--cat-color) 7%, transparent) !important;
+  box-shadow:0 4px 12px color-mix(in srgb,var(--cat-color) 8%, transparent) !important;
 }
 .composer-card{
   margin-top:14px !important;
@@ -1357,12 +1359,12 @@ svg{display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:
   padding-right:74px !important;
 }
 .composer-header{
-  display:flex !important;
+  display:block !important;
   width:100% !important;
   min-height:0 !important;
-  justify-content:flex-end !important;
+  justify-content:initial !important;
   order:2;
-  margin-top:auto;
+  margin-top:0;
 }
 .composer-meta{
   display:none !important;
@@ -1385,16 +1387,19 @@ svg{display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:
   line-height:14px !important;
 }
 .composer-card-cta{
+  position:absolute !important;
+  right:14px !important;
+  bottom:14px !important;
   min-width:0 !important;
   max-width:100% !important;
   height:35px !important;
-  margin:12px 0 0 auto !important;
+  margin:0 !important;
   padding:0 13px !important;
   display:inline-flex !important;
   align-items:center !important;
   justify-content:center !important;
   gap:6px !important;
-  border:1px solid rgba(214,220,214,.8) !important;
+  border:0 !important;
   border-radius:999px !important;
   background:rgba(255,255,255,.64) !important;
   color:#68717E !important;
@@ -1414,7 +1419,7 @@ svg{display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:
 }
 .composer-card-friend{
   right:14px !important;
-  bottom:54px !important;
+  bottom:55px !important;
   width:60px !important;
   height:47px !important;
   opacity:.9;
@@ -1463,6 +1468,8 @@ svg{display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:
     gap:5px !important;
   }
   .composer-card-cta{
+    right:11px !important;
+    bottom:13px !important;
     height:34px !important;
     padding:0 12px !important;
     font-size:13px !important;
