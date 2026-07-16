@@ -1594,6 +1594,7 @@ svg{display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:
   display:flex !important;
   width:100% !important;
   margin-top:14px !important;
+  padding-left:25px !important;
 }
 .composer-examples{
   order:1 !important;
@@ -1671,6 +1672,7 @@ svg{display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:
   }
   .composer-header{
     margin-top:12px !important;
+    padding-left:24px !important;
   }
   .composer-examples{
     padding-right:0 !important;
