@@ -1513,7 +1513,9 @@ svg{display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:
   height:39px !important;
   padding:0 10px !important;
   flex-direction:row !important;
-  gap:3px !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:1px !important;
   font-size:14px !important;
   background:color-mix(in srgb,var(--cat-soft) 70%, #fff) !important;
   color:#313946 !important;
@@ -1646,7 +1648,7 @@ svg{display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:
     height:38px !important;
     padding:0 9px !important;
     font-size:13.5px !important;
-    gap:3px !important;
+    gap:1px !important;
   }
   .composer-card{
     margin-top:20px !important;
