@@ -1519,6 +1519,11 @@ svg{display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:
   margin-top:22px !important;
   min-height:166px !important;
   padding:20px 18px 17px !important;
+  box-shadow:none !important;
+}
+.composer-card.is-ready,
+.composer-card:active{
+  box-shadow:none !important;
 }
 .composer-main{
   min-height:130px !important;
