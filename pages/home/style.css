@@ -1349,10 +1349,75 @@ svg{display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:
 }
 .composer-card{
   margin-top:14px !important;
+  min-height:162px !important;
+  padding:17px 18px 15px !important;
+}
+.composer-main{
+  min-height:130px !important;
+  padding-right:74px !important;
+}
+.composer-header{
+  display:flex !important;
+  width:100% !important;
+  min-height:0 !important;
+  justify-content:flex-end !important;
+  order:2;
+  margin-top:auto;
+}
+.composer-meta{
+  display:none !important;
 }
 .composer-examples{
-  margin-top:13px !important;
-  gap:0 !important;
+  order:1;
+  margin-top:0 !important;
+  padding-right:12px !important;
+  gap:6px !important;
+  color:#596272 !important;
+  font-size:14px !important;
+  line-height:1.45 !important;
+  font-weight:460 !important;
+}
+.example-line{
+  gap:7px !important;
+}
+.example-quote{
+  font-size:18px !important;
+  line-height:14px !important;
+}
+.composer-card-cta{
+  min-width:0 !important;
+  max-width:100% !important;
+  height:35px !important;
+  margin:12px 0 0 auto !important;
+  padding:0 13px !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:6px !important;
+  border:1px solid rgba(214,220,214,.8) !important;
+  border-radius:999px !important;
+  background:rgba(255,255,255,.64) !important;
+  color:#68717E !important;
+  font-size:13.5px !important;
+  font-weight:580 !important;
+  line-height:1 !important;
+  letter-spacing:-.025em !important;
+  white-space:nowrap !important;
+  text-align:center !important;
+  box-shadow:none !important;
+}
+.composer-card.is-ready .composer-card-cta{
+  border-color:color-mix(in srgb,var(--cat-color) 18%, #fff) !important;
+  background:var(--cat-soft) !important;
+  color:var(--cat-color) !important;
+  font-weight:620 !important;
+}
+.composer-card-friend{
+  right:14px !important;
+  bottom:54px !important;
+  width:60px !important;
+  height:47px !important;
+  opacity:.9;
 }
 .section-head h2{
   font-size:16px !important;
@@ -1384,5 +1449,28 @@ svg{display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:
   .category-chip .category-icon{
     width:14px !important;
     height:14px !important;
+  }
+  .composer-card{
+    min-height:158px !important;
+    padding:16px 16px 14px !important;
+  }
+  .composer-main{
+    min-height:128px !important;
+    padding-right:68px !important;
+  }
+  .composer-examples{
+    font-size:13.5px !important;
+    gap:5px !important;
+  }
+  .composer-card-cta{
+    height:34px !important;
+    padding:0 12px !important;
+    font-size:13px !important;
+  }
+  .composer-card-friend{
+    right:11px !important;
+    bottom:52px !important;
+    width:56px !important;
+    height:44px !important;
   }
 }
