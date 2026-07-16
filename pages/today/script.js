@@ -51,25 +51,66 @@ function iconMarkup(type){
   return `<span class="mark-icon"><i class="piece-icon ${type}" aria-hidden="true"></i></span>`;
 }
 
+function renderStorageStats(){
+  const records = Storage.getAll();
+  const summary = document.querySelector('.summary-main');
+  if(summary) summary.textContent = summary.textContent.replace(/^\d+/, String(records.length));
+  const counts = records.reduce((acc, record)=>({...acc,[record.category]:(acc[record.category]||0)+1}),{});
+  document.querySelectorAll('.fragment-summary span').forEach((item)=>{
+    const icon = item.querySelector('.piece-icon');
+    const type = icon?.className.split(' ').find(name=>name!=='piece-icon');
+    if(item.childNodes.length > 1 && type) item.childNodes[item.childNodes.length-1].nodeValue = String(counts[type]||0);
+  });
+}
+
 function latestTopicCopies(topic){
   const records = Storage.getAll();
   if(!records.length) return topicCopies[topic];
   return records.slice(0,3).map((record)=>[
     record.category,
     record.content || record.todos?.map(todo=>todo.text||todo[0]).filter(Boolean).join('\n') || '',
-    new Date(record.createdAt).toLocaleDateString('ko-KR',{month:'numeric',day:'numeric'}) + ' 쨌 ' + new Date(record.createdAt).toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'})
+    new Date(record.createdAt).toLocaleDateString('ko-KR',{month:'numeric',day:'numeric'}) + ' 쨌 ' + new Date(record.createdAt).toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'}),
+    record.id
   ]);
 }
 
 function renderTopic(topic){
   selectedTopic.textContent = topic;
   const list = document.getElementById('relatedList');
-  list.innerHTML = latestTopicCopies(topic).map(([type, copy, time]) => `
-    <article class="related-item">
+  list.innerHTML = latestTopicCopies(topic).map(([type, copy, time, id]) => `
+    <article class="related-item" data-record="${id||''}">
       ${iconMarkup(type)}
       <div><p>${copy}</p><time>${time}</time></div>
+      ${id?`<button type="button" aria-label="기록 메뉴" data-menu="${id}">⋯</button><div hidden data-menu-panel="${id}"><button type="button" data-edit="${id}">수정</button><button type="button" data-delete="${id}">삭제</button></div>`:''}
     </article>`).join('');
 }
+
+document.getElementById('relatedList').addEventListener('click',(event)=>{
+  const menu=event.target.closest('[data-menu]'),edit=event.target.closest('[data-edit]'),del=event.target.closest('[data-delete]');
+  if(menu||edit||del){event.preventDefault();event.stopPropagation();event.stopImmediatePropagation()}
+  if(menu){const panel=document.querySelector(`[data-menu-panel="${CSS.escape(menu.dataset.menu)}"]`);document.querySelectorAll('[data-menu-panel]').forEach(item=>{if(item!==panel)item.hidden=true});if(panel)panel.hidden=!panel.hidden}
+  if(edit)MaumTalkRouter.navigate('editor',{edit:edit.dataset.edit});
+  if(del&&confirm('삭제할까요?')){Storage.remove(del.dataset.delete);renderTopic(selectedTopic.textContent)}
+});
+
+renderTopic=function(topic){
+  selectedTopic.textContent = topic;
+  const list = document.getElementById('relatedList');
+  list.innerHTML = latestTopicCopies(topic).map(([type, copy, time, id]) => `
+    <article class="related-item" data-record="${id||''}">
+      ${iconMarkup(type)}
+      <div><p>${copy}</p><time>${time}</time></div>
+      ${id?`<button type="button" aria-label="record menu" data-menu="${id}">&#8942;</button><div hidden data-menu-panel="${id}"><button type="button" data-edit="${id}">&#49688;&#51221;</button><button type="button" data-delete="${id}">&#49325;&#51228;</button></div>`:''}
+    </article>`).join('');
+};
+document.getElementById('relatedList').addEventListener('click',(event)=>{
+  const menu=event.target.closest('[data-menu]'),edit=event.target.closest('[data-edit]'),del=event.target.closest('[data-delete]');
+  if(menu||edit||del){event.preventDefault();event.stopPropagation();event.stopImmediatePropagation()}
+  if(menu){const panel=document.querySelector(`[data-menu-panel="${CSS.escape(menu.dataset.menu)}"]`);document.querySelectorAll('[data-menu-panel]').forEach(item=>{if(item!==panel)item.hidden=true});if(panel)panel.hidden=!panel.hidden}
+  if(edit)MaumTalkRouter.navigate('editor',{edit:edit.dataset.edit});
+  if(del&&confirm('\uC0AD\uC81C\uD560\uAE4C\uC694?')){Storage.remove(del.dataset.delete);renderStorageStats();renderTopic(selectedTopic.textContent)}
+},true);
+renderStorageStats();
 
 document.querySelectorAll('.topic-line').forEach((line) => {
   line.addEventListener('click', () => {

@@ -59,4 +59,39 @@ document.getElementById('prevMonth').onclick=()=>{currentMonth=Math.max(0,curren
 const searchLayer=document.getElementById('searchLayer'),searchInput=document.getElementById('searchInput'),searchResults=document.getElementById('searchResults'),recentSearches=document.getElementById('recentSearches'),searchCaption=document.getElementById('searchCaption');document.getElementById('searchBtn').onclick=()=>{searchLayer.classList.add('show');searchLayer.setAttribute('aria-hidden','false');setTimeout(()=>searchInput.focus(),180)};document.getElementById('closeSearch').onclick=closeSearch;function closeSearch(){searchLayer.classList.remove('show');searchLayer.setAttribute('aria-hidden','true');searchInput.value='';searchResults.innerHTML='';recentSearches.hidden=false;searchCaption.textContent='최근 검색'}function renderSearch(q){const term=q.trim().toLowerCase();if(!term){searchResults.innerHTML='';recentSearches.hidden=false;searchCaption.textContent='최근 검색';return}recentSearches.hidden=true;const rs=records.filter(r=>`${r.text} ${meta[r.type].label}`.toLowerCase().includes(term));searchCaption.textContent=`검색 결과 ${rs.length}개`;searchResults.innerHTML=rs.length?rs.map(r=>recordHtml(r)).join(''):'<div class="empty-result"><div class="empty-symbol">⌕</div><strong>찾는 기록이 없어요</strong><p>다른 단어로 다시 찾아보세요.</p></div>';bindRecords(searchResults)}searchInput.oninput=e=>renderSearch(e.target.value);recentSearches.querySelectorAll('button').forEach(b=>b.onclick=()=>{searchInput.value=b.textContent;renderSearch(b.textContent)});
 const quickSheet=document.getElementById('quickSheet');fab.onclick=()=>{quickSheet.classList.add('show');quickSheet.setAttribute('aria-hidden','false')};document.getElementById('closeQuickSheet').onclick=closeQuick;quickSheet.onclick=e=>{if(e.target===quickSheet)closeQuick()};function closeQuick(){quickSheet.classList.remove('show');quickSheet.setAttribute('aria-hidden','true')}quickSheet.querySelectorAll('[data-type]').forEach(b=>b.onclick=()=>{const type=b.dataset.type;closeQuick();showToast(`${meta[type].label} 입력 화면으로 연결할 자리예요.`)});
 const toast=document.getElementById('toast');let toastTimer;function showToast(msg){clearTimeout(toastTimer);toast.textContent=msg;toast.classList.add('show');toastTimer=setTimeout(()=>toast.classList.remove('show'),1700)}
+recordHtml=function(r,mini=false){
+ const m=meta[r.type]||meta.plain;
+ if(mini)return `<button class="selected-mini" data-record="${r.id}" type="button"><span class="record-emoji" style="--color:${m.color}">${r.icon}</span><p>${escapeHtml(r.text.split('\n')[0])}</p><time>${timeLabel(r.date)}</time></button>`;
+ const hasMedia=!!r.media,clamp=hasMedia?'clamp-3':'clamp-5',needsExpand=!hasMedia&&r.text.split('\n').length>5;
+ return `<article class="record-entry" data-record="${r.id}" style="--color:${m.color}">
+   <div class="record-topline"><span class="record-emoji">${r.icon}</span>${attachmentLabel(r)?`<span class="attachment-meta">${attachmentLabel(r)}</span>`:''}<button type="button" aria-label="기록 메뉴" data-menu="${r.id}">⋯</button><div hidden data-menu-panel="${r.id}"><button type="button" data-edit="${r.id}">수정</button><button type="button" data-delete="${r.id}">삭제</button></div></div>
+   ${r.type==='todo'?todoHtml(r):`<p class="record-text clamped ${clamp}"><span class="record-titleline">${escapeHtml(r.text.split('\n')[0])}</span>${escapeHtml(r.text.split('\n').slice(1).join('\n'))}</p>${mediaHtml(r)}`}
+   <div class="record-footer"><time class="record-time">${timeLabel(r.date)}</time>${needsExpand?'<button class="expand-button" type="button">怨꾩냽 ?쎄린 ??/button>':''}</div>
+ </article>`;
+};
+document.addEventListener('click',event=>{
+ const menu=event.target.closest('[data-menu]'),edit=event.target.closest('[data-edit]'),del=event.target.closest('[data-delete]');
+ if(!(menu||edit||del))return;
+ event.preventDefault();event.stopPropagation();event.stopImmediatePropagation();
+ if(menu){const panel=document.querySelector(`[data-menu-panel="${CSS.escape(menu.dataset.menu)}"]`);document.querySelectorAll('[data-menu-panel]').forEach(item=>{if(item!==panel)item.hidden=true});if(panel)panel.hidden=!panel.hidden}
+ if(edit)MaumTalkRouter.navigate('editor',{edit:edit.dataset.edit});
+ if(del&&confirm('\uC0AD\uC81C\uD560\uAE4C\uC694?')){Storage.remove(del.dataset.delete);location.reload()}
+},true);
+document.addEventListener('click',event=>{
+ const menu=event.target.closest('[data-menu]'),edit=event.target.closest('[data-edit]'),del=event.target.closest('[data-delete]');
+ if(menu||edit||del){event.preventDefault();event.stopPropagation()}
+ if(menu){const panel=document.querySelector(`[data-menu-panel="${CSS.escape(menu.dataset.menu)}"]`);document.querySelectorAll('[data-menu-panel]').forEach(item=>{if(item!==panel)item.hidden=true});if(panel)panel.hidden=!panel.hidden}
+ if(edit)MaumTalkRouter.navigate('editor',{edit:edit.dataset.edit});
+ if(del&&confirm('삭제할까요?')){Storage.remove(del.dataset.delete);location.reload()}
+},true);
+recordHtml=function(r,mini=false){
+ const m=meta[r.type]||meta.plain;
+ if(mini)return `<button class="selected-mini" data-record="${r.id}" type="button"><span class="record-emoji" style="--color:${m.color}">${r.icon}</span><p>${escapeHtml(r.text.split('\n')[0])}</p><time>${timeLabel(r.date)}</time></button>`;
+ const hasMedia=!!r.media,clamp=hasMedia?'clamp-3':'clamp-5',needsExpand=!hasMedia&&r.text.split('\n').length>5;
+ return `<article class="record-entry" data-record="${r.id}" style="--color:${m.color}">
+   <div class="record-topline"><span class="record-emoji">${r.icon}</span>${attachmentLabel(r)?`<span class="attachment-meta">${attachmentLabel(r)}</span>`:''}<button type="button" aria-label="record menu" data-menu="${r.id}">&#8942;</button><div hidden data-menu-panel="${r.id}"><button type="button" data-edit="${r.id}">&#49688;&#51221;</button><button type="button" data-delete="${r.id}">&#49325;&#51228;</button></div></div>
+   ${r.type==='todo'?todoHtml(r):`<p class="record-text clamped ${clamp}"><span class="record-titleline">${escapeHtml(r.text.split('\n')[0])}</span>${escapeHtml(r.text.split('\n').slice(1).join('\n'))}</p>${mediaHtml(r)}`}
+   <div class="record-footer"><time class="record-time">${timeLabel(r.date)}</time>${needsExpand?'<button class="expand-button" type="button">怨꾩냽 ?쎄린 ??/button>':''}</div>
+ </article>`;
+};
 renderList();

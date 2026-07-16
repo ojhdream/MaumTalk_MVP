@@ -35,6 +35,7 @@ const addTodoButton = document.getElementById('addTodoButton');
 const attachmentPreview = document.getElementById('attachmentPreview');
 const toolToast = document.getElementById('toolToast');
 let activeCategory = categories[0];
+let editRecord = null;
 
 function formatNow(){
   const now = new Date();
@@ -143,13 +144,15 @@ function saveRecord(){
   const todos = activeCategory.id === 'todo' ? collectTodos() : [];
   const content = activeCategory.id === 'todo' ? (todoNote.value.trim() || todos.map(todo=>todo.text).join('\n')) : noteInput.value.trim();
   if(content || todos.length){
-    Storage.save({
+    const data = {
       category: activeCategory.id,
       content,
       todos,
       tags: [],
       attachments: attachmentPreview.children.length ? [{ type: 'tool' }] : []
-    });
+    };
+    if(editRecord) Storage.update(editRecord.id,data);
+    else Storage.save(data);
     noteInput.value = '';
     todoNote.value = '';
     todoList.innerHTML = '';
@@ -170,9 +173,32 @@ function initialCategory(){
   return categories.find(category=>category.id===requested) || categories[0];
 }
 
+function loadEditMode(){
+  const id = new URLSearchParams(location.search).get('edit');
+  if(!id) return;
+  editRecord = Storage.get(id);
+  if(!editRecord) return;
+  const category = categories.find(item=>item.id===editRecord.category) || categories[0];
+  setCategory(category);
+  if(category.id === 'todo'){
+    todoList.innerHTML = '';
+    (editRecord.todos.length ? editRecord.todos : [{text:editRecord.content,done:false}]).forEach((todo)=>{
+      addTodoRow(false);
+      const row = todoList.lastElementChild;
+      row.querySelector('.todo-input').value = todo.text || '';
+      if(todo.done) row.querySelector('.todo-check').classList.add('checked');
+    });
+    todoNote.value = editRecord.content || '';
+  } else {
+    noteInput.value = editRecord.content || '';
+    characterCount.textContent = noteInput.value.length.toLocaleString();
+  }
+}
+
 formatNow();
 renderCategoryList();
 setCategory(initialCategory());
+loadEditMode();
 
 
 (function(){

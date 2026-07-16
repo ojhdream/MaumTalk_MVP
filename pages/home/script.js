@@ -105,5 +105,37 @@ function initComposer(){
  els.card.setAttribute('aria-label','마음에 가까운 하나를 고른 뒤 기록하기');
  updateFriend('friend-idle.svg');
 }
+renderRecords=function(){
+ if(!records.length){els.recent.innerHTML='<div class="empty-state"><strong>?꾩쭅 ?④릿 議곌컖???놁뼱??</strong>?ъ냼??寃껊룄 媛蹂띻쾶 ?④꺼蹂댁꽭??</div>';return}
+ els.recent.innerHTML=records.slice(0,3).map(record=>{
+  const cat=fixedCategories.find(item=>item.id===record.categoryId)||{name:record.category,color:record.color||'#6B7280',soft:record.soft||'#F1F3F2',icon:record.icon||'plain'};
+  const menu=isDemoMode?'':`<button type="button" aria-label="기록 메뉴" data-menu="${escapeHTML(record.id)}">⋯</button><div hidden data-menu-panel="${escapeHTML(record.id)}"><button type="button" data-edit="${escapeHTML(record.id)}">수정</button><button type="button" data-delete="${escapeHTML(record.id)}">삭제</button></div>`;
+  return `<article class="record-item" tabindex="0" role="button" aria-label="${escapeHTML(cat.name)} 湲곕줉: ${escapeHTML(record.text)}" data-record="${escapeHTML(record.id)}"><span class="record-icon-wrap" style="--record-color:${cat.color};--record-soft:${cat.soft}">${icon(cat,'record-icon')}</span><div class="record-copy"><p>${escapeHTML(record.text)}</p><span class="record-meta" style="--record-color:${cat.color}">${escapeHTML(cat.name)}</span></div><time>${escapeHTML(record.time||'')}</time>${menu}</article>`;
+ }).join('');
+};
+function refreshStoredRecords(){
+ const next=Storage.getAll();
+ isDemoMode=next.length===0;
+ records=isDemoMode?DEMO_RECORDS.slice():next.map(storageRecordToHome);
+ renderRecords();
+}
+function editStoredRecord(id){MaumTalkRouter.navigate('editor',{edit:id})}
+function deleteStoredRecord(id){if(!confirm('삭제할까요?'))return;Storage.remove(id);refreshStoredRecords();showToast('삭제했어요.')}
+els.recent.addEventListener('click',event=>{
+ const menu=event.target.closest('[data-menu]'),edit=event.target.closest('[data-edit]'),del=event.target.closest('[data-delete]');
+ if(menu||edit||del){event.preventDefault();event.stopPropagation()}
+ if(menu){const panel=els.recent.querySelector(`[data-menu-panel="${CSS.escape(menu.dataset.menu)}"]`);els.recent.querySelectorAll('[data-menu-panel]').forEach(item=>{if(item!==panel)item.hidden=true});if(panel)panel.hidden=!panel.hidden}
+ if(edit)editStoredRecord(edit.dataset.edit);
+ if(del)deleteStoredRecord(del.dataset.delete);
+});
+renderRecords=function(){
+ if(!records.length){els.recent.innerHTML='<div class="empty-state"><strong>?꾩쭅 ?④릿 議곌컖???놁뼱??</strong>?ъ냼??寃껊룄 媛蹂띻쾶 ?④꺼蹂댁꽭??</div>';return}
+ els.recent.innerHTML=records.slice(0,3).map(record=>{
+  const cat=fixedCategories.find(item=>item.id===record.categoryId)||{name:record.category,color:record.color||'#6B7280',soft:record.soft||'#F1F3F2',icon:record.icon||'plain'};
+  const menu=isDemoMode?'':`<button type="button" aria-label="record menu" data-menu="${escapeHTML(record.id)}">&#8942;</button><div hidden data-menu-panel="${escapeHTML(record.id)}"><button type="button" data-edit="${escapeHTML(record.id)}">&#49688;&#51221;</button><button type="button" data-delete="${escapeHTML(record.id)}">&#49325;&#51228;</button></div>`;
+  return `<article class="record-item" tabindex="0" role="button" aria-label="${escapeHTML(cat.name)} record: ${escapeHTML(record.text)}" data-record="${escapeHTML(record.id)}"><span class="record-icon-wrap" style="--record-color:${cat.color};--record-soft:${cat.soft}">${icon(cat,'record-icon')}</span><div class="record-copy"><p>${escapeHTML(record.text)}</p><span class="record-meta" style="--record-color:${cat.color}">${escapeHTML(cat.name)}</span></div><time>${escapeHTML(record.time||'')}</time>${menu}</article>`;
+ }).join('');
+};
+deleteStoredRecord=function(id){if(!confirm('\uC0AD\uC81C\uD560\uAE4C\uC694?'))return;Storage.remove(id);refreshStoredRecords();showToast('\uC0AD\uC81C\uD588\uC5B4\uC694.')}
 applyDate();renderRecords();els.friendCta?.addEventListener('click',(event)=>{event.stopPropagation();startEditor();});
 renderCategories();initComposer();
