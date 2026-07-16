@@ -1190,6 +1190,17 @@ svg{display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:
   display:inline-block;
   margin-left:1px;
 }
+.composer-meta:has(.selected-label:empty){
+  display:none !important;
+}
+.composer-meta:has(.selected-label:empty) + .composer-card-cta{
+  min-width:0;
+  max-width:100%;
+  justify-content:flex-end;
+  text-align:right;
+  line-height:1.22;
+  white-space:normal;
+}
 .composer-examples{
   box-sizing:border-box;
   width:100%;

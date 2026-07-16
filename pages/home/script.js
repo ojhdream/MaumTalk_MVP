@@ -27,6 +27,13 @@ let records=isDemoMode?DEMO_RECORDS.slice():storedRecords.map(storageRecordToHom
 let selected=null;
 const $=s=>document.querySelector(s);
 const els={fixed:$('#fixedCategoryGrid'),label:$('#selectedLabel'),hint:$('#selectedHint'),examples:$('#composerExamples'),cta:null,card:$('#composerCard'),friend:document.querySelector('.friend'),friendImage:$('#friendImage'),friendCta:$('#friendCta'),editor:$('#editorScreen'),editorText:$('#editorText'),editorCategory:$('#editorCategory'),charCount:$('#charCount'),recent:$('#recentList'),clone:$('#expandClone'),toast:$('#toast')};
+const CTA_COPY={
+ plain:'\uC0DD\uAC01\uB098\uB294 \uB300\uB85C, \uD230 \uAE30\uB85D\uD574\uBCFC\uAE4C?',
+ daily:'\uC624\uB298\uC744 \uB2F4\uB2F4\uD558\uAC8C, \uD230 \uAE30\uB85D\uD574\uBCFC\uAE4C?',
+ worry:'\uB9C8\uC74C\uC744 \uCC9C\uCC9C\uD788, \uD230 \uAE30\uB85D\uD574\uBCFC\uAE4C?',
+ spark:'\uC2A4\uCCD0\uAC04 \uC0DD\uAC01, \uD230 \uAE30\uB85D\uD574\uBCFC\uAE4C?',
+ todo:'\uC78A\uAE30 \uC804\uC5D0, \uD230 \uAE30\uB85D\uD574\uBCFC\uAE4C?'
+};
 function escapeHTML(v=''){return String(v).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
 function formatDate(d){return `${d.getMonth()+1}월 ${d.getDate()}일 ${['일요일','월요일','화요일','수요일','목요일','금요일','토요일'][d.getDay()]}`}
 function formatTime(d){return d.toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit',hour12:true})}
@@ -54,16 +61,22 @@ function nudgeComposerCta(){
  void els.friendCta.offsetWidth;
  els.friendCta.classList.add('is-nudging');
 }
+function setComposerCta(category){
+ const label=els.friendCta?.querySelector('span:first-child');
+ if(label)label.textContent=CTA_COPY[category?.id]||'\uD230, \uAE30\uB85D\uD574\uBCFC\uAE4C?';
+}
 function selectCategory(id){
  selected=fixedCategories.find(cat=>cat.id===id)||null;
  if(!selected)return;
  els.label.style.setProperty('--cat-color',selected.color);els.label.style.setProperty('--cat-soft',selected.soft);
- els.label.innerHTML=`${icon(selected,'label-icon')}<span>${escapeHTML(selected.name)}</span>`;
- els.hint.textContent=selected.hint||'';
+ els.label.innerHTML='';
+ els.hint.textContent='';
+ els.hint.style.display='none';
  els.examples.innerHTML=selected.examples.map(text=>`<div class="example-line"><span class="example-quote">“</span><span>${escapeHTML(text)}</span></div>`).join('');
  els.card.style.setProperty('--cat-color',selected.color);
  els.card.classList.add('is-ready');
  els.card.setAttribute('aria-label',`${selected.name}으로 기록하기`);
+ setComposerCta(selected);
  updateFriend(selected.friend);
  nudgeComposerCta();
  renderCategories();
@@ -107,6 +120,8 @@ function initComposer(){
  const examples=fixedCategories[0].examples;
  els.label.innerHTML='';
  els.hint.textContent='';
+ els.hint.style.display='none';
+ setComposerCta(null);
  els.examples.innerHTML=examples.map(text=>`<div class="example-line"><span class="example-quote">“</span><span>${escapeHTML(text)}</span></div>`).join('');
  els.card.classList.remove('is-ready');
  els.card.setAttribute('aria-label','마음에 가까운 하나를 고른 뒤 기록하기');
