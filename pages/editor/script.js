@@ -205,7 +205,7 @@ loadEditMode();
  const footer=document.querySelector('.editor-footer');
  const input=document.getElementById('noteInput');
  if(input && footer){
-   input.addEventListener('focus',()=>footer.classList.add('keyboard-open'));
+   input.addEventListener('focus',()=>footer.classList.remove('keyboard-open'));
    input.addEventListener('blur',()=>footer.classList.remove('keyboard-open'));
  }
 })();
