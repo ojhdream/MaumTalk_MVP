@@ -149,3 +149,10 @@ els.recent.addEventListener('click',event=>{
 });
 renderTodayEmptyState();
 deleteStoredRecord=function(id){if(!confirm('\uC0AD\uC81C\uD560\uAE4C\uC694?'))return;Storage.remove(id);refreshStoredRecords();renderTodayEmptyState();showToast('\uC0AD\uC81C\uD588\uC5B4\uC694.')}
+function openZipEditor(){
+ if(!selected){showToast('留덉쓬??媛源뚯슫 ?섎굹瑜?癒쇱? 怨⑤씪蹂댁꽭??');return}
+ MaumTalkRouter.navigate('editor',{category:selected.id});
+}
+els.card.addEventListener('click',event=>{event.preventDefault();event.stopPropagation();event.stopImmediatePropagation();openZipEditor()},true);
+els.card.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();event.stopPropagation();event.stopImmediatePropagation();openZipEditor()}},true);
+els.friendCta?.addEventListener('click',event=>{event.preventDefault();event.stopPropagation();event.stopImmediatePropagation();openZipEditor()},true);
