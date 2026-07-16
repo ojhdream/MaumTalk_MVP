@@ -108,7 +108,7 @@ document.getElementById('relatedList').addEventListener('click',(event)=>{
   if(menu||edit||del){event.preventDefault();event.stopPropagation();event.stopImmediatePropagation()}
   if(menu){const panel=document.querySelector(`[data-menu-panel="${CSS.escape(menu.dataset.menu)}"]`);document.querySelectorAll('[data-menu-panel]').forEach(item=>{if(item!==panel)item.hidden=true});if(panel)panel.hidden=!panel.hidden}
   if(edit)MaumTalkRouter.navigate('editor',{edit:edit.dataset.edit});
-  if(del&&confirm('\uC0AD\uC81C\uD560\uAE4C\uC694?')){Storage.remove(del.dataset.delete);renderStorageStats();renderTopic(selectedTopic.textContent)}
+  if(del&&confirm('\uC0AD\uC81C\uD560\uAE4C\uC694?')){Storage.remove(del.dataset.delete);renderStorageStats();renderTopic(selectedTopic.textContent);renderRecentEmptyState()}
 },true);
 renderStorageStats();
 
@@ -135,3 +135,23 @@ document.getElementById('calendarGrid').innerHTML = calendarData.map((day) => {
 }).join('');
 
 renderTopic('산책');
+
+function renderRecentEmptyState(){
+ const records=Storage.getAll();
+ let empty=document.querySelector('[data-empty-state="recent"]');
+ const sections=document.querySelectorAll('.summary-block,.section-block,.closing-copy');
+ if(records.length>=3){
+   sections.forEach(section=>section.hidden=false);
+   empty?.remove();
+   return;
+ }
+ sections.forEach(section=>section.hidden=true);
+ if(!empty){
+   empty=document.createElement('section');
+   empty.dataset.emptyState='recent';
+   empty.style.cssText='min-height:calc(100vh - 230px);padding:42px 18px 104px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;text-align:center;gap:8px';
+   empty.innerHTML='<strong style="font-size:16px;font-weight:600">아직 보여드릴 요즘이 없어요.</strong><p style="margin:0;font-size:13px;line-height:1.6;color:#8A929C">기록이 조금 쌓이면 마음의 흐름을 보여드릴게요.</p>';
+   periodMenu.insertAdjacentElement('afterend',empty);
+ }
+}
+renderRecentEmptyState();

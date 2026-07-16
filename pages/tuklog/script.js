@@ -95,3 +95,20 @@ recordHtml=function(r,mini=false){
  </article>`;
 };
 renderList();
+function renderTuklogEmptyState(){
+ if(Storage.getAll().length>0)return;
+ const existing=document.querySelector('[data-empty-state="tuklog"]');
+ if(existing)existing.remove();
+ timeline.innerHTML='';
+ memoryCard.style.display='none';
+ emptyResult.hidden=true;
+ const empty=document.createElement('div');
+ empty.dataset.emptyState='tuklog';
+ empty.style.cssText='min-height:calc(100vh - 260px);padding:34px 16px 104px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;text-align:center;gap:8px';
+ empty.innerHTML='<img src="../../assets/friend/friend-idle.svg" alt="" aria-hidden="true" style="width:76px;height:auto;margin-bottom:6px"><strong style="font-size:16px;font-weight:600">아직 쌓인 툭이 없어요.</strong><p style="margin:0;font-size:13px;line-height:1.6;color:#8A929C">첫 마음을 남기면 이곳에서 다시 만날 수 있어요.</p><button type="button" data-empty-cta="tuklog" style="margin-top:8px;border:0;background:transparent;color:inherit;font:inherit;font-size:14px;font-weight:600">첫 툭 남기기 →</button>';
+ listView.appendChild(empty);
+}
+listView.addEventListener('click',event=>{
+ if(event.target.closest('[data-empty-cta="tuklog"]')){event.preventDefault();MaumTalkRouter.navigate('editor')}
+});
+renderTuklogEmptyState();

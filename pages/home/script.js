@@ -139,3 +139,13 @@ renderRecords=function(){
 deleteStoredRecord=function(id){if(!confirm('\uC0AD\uC81C\uD560\uAE4C\uC694?'))return;Storage.remove(id);refreshStoredRecords();showToast('\uC0AD\uC81C\uD588\uC5B4\uC694.')}
 applyDate();renderRecords();els.friendCta?.addEventListener('click',(event)=>{event.stopPropagation();startEditor();});
 renderCategories();initComposer();
+function renderTodayEmptyState(){
+ if(Storage.getAll().length>0)return;
+ records=[];
+ els.recent.innerHTML='<div data-empty-state="today" style="min-height:220px;padding:42px 12px 96px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;text-align:center;gap:8px"><strong style="font-size:16px;font-weight:600">오늘은 아직 남긴 툭이 없어요.</strong><p style="margin:0;font-size:13px;line-height:1.6;color:#8A929C">생각나는 게 생기면, 가볍게 남겨보세요.</p><button type="button" data-empty-cta="today" style="margin-top:8px;border:0;background:transparent;color:inherit;font:inherit;font-size:14px;font-weight:600">첫 툭 남기기 →</button></div>';
+}
+els.recent.addEventListener('click',event=>{
+ if(event.target.closest('[data-empty-cta="today"]')){event.preventDefault();MaumTalkRouter.navigate('editor')}
+});
+renderTodayEmptyState();
+deleteStoredRecord=function(id){if(!confirm('\uC0AD\uC81C\uD560\uAE4C\uC694?'))return;Storage.remove(id);refreshStoredRecords();renderTodayEmptyState();showToast('\uC0AD\uC81C\uD588\uC5B4\uC694.')}
