@@ -72,7 +72,7 @@ function selectCategory(id){
  els.label.innerHTML='';
  els.hint.textContent='';
  els.hint.style.display='none';
- els.examples.innerHTML=selected.examples.map(text=>`<div class="example-line"><span class="example-quote">“</span><span>${escapeHTML(text)}</span></div>`).join('');
+ els.examples.innerHTML=selected.examples.slice(0,1).map(text=>`<div class="example-line"><span class="example-quote">“</span><span>${escapeHTML(text)}</span></div>`).join('');
  els.card.style.setProperty('--cat-color',selected.color);
  els.card.classList.add('is-ready');
  els.card.setAttribute('aria-label',`${selected.name}으로 기록하기`);
@@ -122,7 +122,7 @@ function initComposer(){
  els.hint.textContent='';
  els.hint.style.display='none';
  setComposerCta(null);
- els.examples.innerHTML=examples.map(text=>`<div class="example-line"><span class="example-quote">“</span><span>${escapeHTML(text)}</span></div>`).join('');
+ els.examples.innerHTML=examples.slice(0,1).map(text=>`<div class="example-line"><span class="example-quote">“</span><span>${escapeHTML(text)}</span></div>`).join('');
  els.card.classList.remove('is-ready');
  els.card.setAttribute('aria-label','마음에 가까운 하나를 고른 뒤 기록하기');
  updateFriend('friend-idle.svg');

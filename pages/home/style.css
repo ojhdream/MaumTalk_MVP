@@ -1238,3 +1238,97 @@ svg{display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:
   }
   .composer-examples{margin-top:10px}
 }
+
+/* Compact home start: date, prompt, two-row categories, one sample. */
+.home-screen{
+  padding-top:calc(env(safe-area-inset-top) + 18px) !important;
+}
+.topbar{
+  display:none !important;
+}
+.today-date{
+  margin:0 !important;
+  color:#7B8492;
+  font-size:13.5px;
+  font-weight:620;
+  line-height:1.25;
+}
+.home-prompt{
+  margin:6px 0 0;
+  color:var(--ink);
+  font-size:20px;
+  font-weight:760;
+  line-height:1.24;
+  letter-spacing:-.055em;
+}
+.category-section{
+  margin-top:17px !important;
+}
+.category-kicker{
+  display:none !important;
+}
+.fixed-category-grid{
+  display:grid !important;
+  grid-template-columns:repeat(6,minmax(0,1fr)) !important;
+  gap:8px !important;
+}
+.category-chip,
+.category-chip:nth-child(-n+3),
+.category-chip:nth-child(n+4),
+.category-chip:nth-child(4),
+.category-chip:nth-child(5){
+  grid-column:auto !important;
+}
+.category-chip:nth-child(1),
+.category-chip:nth-child(2){
+  grid-column:span 3 !important;
+}
+.category-chip:nth-child(3),
+.category-chip:nth-child(4),
+.category-chip:nth-child(5){
+  grid-column:span 2 !important;
+}
+.category-chip,
+.category-chip.plain-chip{
+  height:39px !important;
+  padding:0 10px !important;
+  flex-direction:row !important;
+  gap:6px !important;
+  font-size:14.5px !important;
+  font-weight:620 !important;
+  letter-spacing:-.04em !important;
+}
+.category-chip .category-icon{
+  width:16px !important;
+  height:16px !important;
+}
+.composer-card{
+  margin-top:14px !important;
+}
+.composer-examples{
+  margin-top:13px !important;
+  gap:0 !important;
+}
+
+@media(max-width:365px){
+  .home-screen{
+    padding-top:calc(env(safe-area-inset-top) + 16px) !important;
+  }
+  .home-prompt{
+    font-size:19px;
+  }
+  .fixed-category-grid{
+    gap:7px !important;
+  }
+  .category-chip,
+  .category-chip.plain-chip{
+    height:38px !important;
+    padding:0 7px !important;
+    font-size:14px !important;
+    gap:5px !important;
+  }
+  .category-chip .category-icon{
+    width:15px !important;
+    height:15px !important;
+  }
+}
