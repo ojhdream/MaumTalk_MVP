@@ -1,0 +1,19 @@
+{
+  "name": "MaumTalk MVP",
+  "short_name": "MaumTalk",
+  "start_url": "/pages/home/index.html",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["standalone", "fullscreen"],
+  "background_color": "#F7F8F5",
+  "theme_color": "#F7F8F5",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
