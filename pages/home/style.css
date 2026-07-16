@@ -1521,19 +1521,19 @@ svg{display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:
   box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--cat-color) 14%, #E1E6E3) !important;
 }
 .category-chip[data-id="daily"]{
-  order:1;
-  grid-column:span 3 !important;
-}
-.category-chip[data-id="plain"]{
   order:2;
   grid-column:span 3 !important;
 }
+.category-chip[data-id="plain"]{
+  order:1;
+  grid-column:span 3 !important;
+}
 .category-chip[data-id="spark"]{
-  order:3;
+  order:4;
   grid-column:span 2 !important;
 }
 .category-chip[data-id="worry"]{
-  order:4;
+  order:3;
   grid-column:span 2 !important;
 }
 .category-chip[data-id="todo"]{
