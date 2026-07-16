@@ -1594,7 +1594,7 @@ svg{display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:
   display:flex !important;
   width:100% !important;
   margin-top:14px !important;
-  padding-left:25px !important;
+  padding-left:22px !important;
 }
 .composer-examples{
   order:1 !important;
@@ -1618,10 +1618,10 @@ svg{display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:
 .composer-card-cta{
   position:static !important;
   inset:auto !important;
-  height:34px !important;
-  padding:0 12px !important;
-  border:1px solid color-mix(in srgb,var(--cat-color,#5BA777) 22%, #E1E6E3) !important;
-  background:color-mix(in srgb,var(--cat-soft,#EAF6EE) 74%, #fff) !important;
+  height:auto !important;
+  padding:0 !important;
+  border:0 !important;
+  background:transparent !important;
   color:var(--cat-color,#4F9B68) !important;
   font-size:14.5px !important;
   font-weight:660 !important;
@@ -1673,7 +1673,7 @@ svg{display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:
   }
   .composer-header{
     margin-top:12px !important;
-    padding-left:24px !important;
+    padding-left:21px !important;
   }
   .composer-examples{
     padding-right:0 !important;
@@ -1685,7 +1685,7 @@ svg{display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:
     height:56px !important;
   }
   .composer-card-cta{
-    height:33px !important;
+    height:auto !important;
     font-size:14px !important;
   }
 }
