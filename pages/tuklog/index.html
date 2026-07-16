@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#F7F8F5" />
+  <title>마음툭 — 툭로그</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app-shell" id="app">
+    <section class="screen log-screen" id="logScreen" aria-label="툭로그">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">나의 기록</p>
+          <h1>툭로그</h1>
+        </div>
+        <div class="header-actions">
+          <button class="icon-button" id="searchBtn" type="button" aria-label="기록 검색">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>
+          </button>
+          <button class="icon-button" id="viewToggleBtn" type="button" aria-label="캘린더 보기" aria-pressed="false">
+            <svg class="calendar-icon" viewBox="0 0 24 24"><rect x="3.5" y="5.5" width="17" height="15" rx="3"/><path d="M7.5 3v5M16.5 3v5M3.5 10h17"/></svg>
+            <svg class="list-icon" viewBox="0 0 24 24"><path d="M8 6h12M8 12h12M8 18h12"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/></svg>
+          </button>
+        </div>
+      </header>
+
+      <section class="filter-bar" aria-label="카테고리 필터">
+        <button class="filter-chip active" type="button" data-filter="all">전체</button>
+        <button class="filter-chip" type="button" data-filter="plain"><span class="mini-icon coral">◌</span>그냥 툭</button>
+        <button class="filter-chip" type="button" data-filter="daily"><span class="mini-icon green">⌁</span>일상</button>
+        <button class="filter-chip" type="button" data-filter="worry"><span class="mini-icon purple">☁</span>고민</button>
+        <button class="filter-chip" type="button" data-filter="spark"><span class="mini-icon yellow">✦</span>문득</button>
+        <button class="filter-chip" type="button" data-filter="todo"><span class="mini-icon blue">✓</span>할 일</button>
+      </section>
+
+      <section class="list-view" id="listView" aria-label="기록 목록">
+        <article class="memory-note" id="memoryCard">
+          <span class="memory-dot" aria-hidden="true"></span>
+          <div>
+            <span class="memory-label">오늘 다시 만난 툭</span>
+            <p>“마음이 복잡할수록, 아주 작은 일부터 시작하면 된다.”</p>
+            <time>6월 30일 · 문득</time>
+          </div>
+        </article>
+        <div class="timeline" id="timeline"></div>
+        <div class="empty-result" id="emptyResult" hidden>
+          <div class="empty-symbol">⌕</div>
+          <strong>찾는 기록이 없어요</strong>
+          <p>다른 단어나 카테고리로 다시 찾아보세요.</p>
+        </div>
+      </section>
+
+      <section class="calendar-view" id="calendarView" aria-label="기록 캘린더" hidden>
+        <div class="calendar-head">
+          <button class="month-arrow" id="prevMonth" type="button" aria-label="이전 달">‹</button>
+          <div><strong id="monthTitle">2026년 7월</strong><span id="monthSummary">이번 달 12개의 툭</span></div>
+          <button class="month-arrow" id="nextMonth" type="button" aria-label="다음 달">›</button>
+        </div>
+        <div class="weekday-row" aria-hidden="true"><span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span></div>
+        <div class="calendar-grid" id="calendarGrid"></div>
+        <section class="selected-day" id="selectedDay">
+          <div class="selected-day-head"><div><strong id="selectedDateTitle">7월 14일 화요일</strong><span id="selectedDateCount">3개의 기록</span></div><button type="button" class="small-text-button" id="showDayList">목록으로 보기</button></div>
+          <div id="selectedDayRecords"></div>
+        </section>
+      </section>
+    </section>
+
+    <button class="fab" id="fab" type="button" aria-label="새 기록 남기기"><span>툭</span><i aria-hidden="true"></i></button>
+
+    <nav class="bottom-nav" aria-label="주요 메뉴">
+      <button class="nav-item" type="button"><svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5V21H7v-7h10v7"/></svg><span>오늘</span></button>
+      <button class="nav-item active" type="button"><svg viewBox="0 0 24 24"><path d="M5 6h14M5 12h14M5 18h14"/></svg><span>툭로그</span></button>
+      <button class="nav-item" type="button"><svg viewBox="0 0 24 24"><path d="M4 13c2-5 4 5 7 0s5 5 9-1"/></svg><span>요즘</span></button>
+      <button class="nav-item" type="button"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4.5 21c.6-4.2 3.1-6.5 7.5-6.5s6.9 2.3 7.5 6.5"/></svg><span>나</span></button>
+    </nav>
+
+    <section class="search-layer" id="searchLayer" aria-hidden="true">
+      <header class="search-head">
+        <button class="back-button" id="closeSearch" type="button" aria-label="검색 닫기"><svg viewBox="0 0 24 24"><path d="m15 5-7 7 7 7"/></svg></button>
+        <label class="search-box"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg><input id="searchInput" type="search" placeholder="기록 속 단어를 찾아보세요" autocomplete="off" /></label>
+      </header>
+      <div class="search-body">
+        <p class="search-caption" id="searchCaption">최근 검색</p>
+        <div class="recent-searches" id="recentSearches"><button type="button">산책</button><button type="button">엄마</button><button type="button">카레</button></div>
+        <div class="search-results" id="searchResults"></div>
+      </div>
+    </section>
+
+    <div class="quick-sheet-backdrop" id="quickSheet" aria-hidden="true">
+      <section class="quick-sheet" role="dialog" aria-modal="true" aria-labelledby="quickTitle">
+        <div class="sheet-handle"></div>
+        <h2 id="quickTitle">어떤 조각을 남길까요?</h2>
+        <div class="quick-grid">
+          <button type="button" data-type="plain"><span class="quick-symbol coral">◌</span><b>그냥 툭</b></button>
+          <button type="button" data-type="daily"><span class="quick-symbol green">⌁</span><b>일상</b></button>
+          <button type="button" data-type="worry"><span class="quick-symbol purple">☁</span><b>고민</b></button>
+          <button type="button" data-type="spark"><span class="quick-symbol yellow">✦</span><b>문득</b></button>
+          <button type="button" data-type="todo"><span class="quick-symbol blue">✓</span><b>할 일</b></button>
+        </div>
+        <button class="sheet-cancel" id="closeQuickSheet" type="button">닫기</button>
+      </section>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </main>
+  <script src="../../storage.js"></script>
+  <script src="../../router.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

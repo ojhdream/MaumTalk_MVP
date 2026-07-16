@@ -1,0 +1,273 @@
+:root{
+  --bg:#F7F8F5;
+  --surface:#FFFFFF;
+  --paper:#FFFDF9;
+  --ink:#182335;
+  --ink-2:#46505E;
+  --muted:#808894;
+  --line:#E5E9E3;
+  --green:#38A66B;
+  --yellow:#F4C541;
+  --orange:#F58A60;
+  --blue:#67A6E8;
+  --purple:#9479D3;
+  --mint:#56AA7E;
+  --shadow:0 14px 42px rgba(24,35,53,.055);
+  --ease:cubic-bezier(.22,.78,.24,1);
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:#EDEFEA;color:var(--ink);font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;-webkit-font-smoothing:antialiased}
+body{display:grid;place-items:center}
+button,input,textarea{font:inherit;color:inherit}
+button{border:0;background:none;cursor:pointer;-webkit-tap-highlight-color:transparent}
+svg{display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.app-shell{position:relative;width:min(100vw,430px);height:min(100dvh,920px);overflow:hidden;background:var(--bg);box-shadow:0 28px 90px rgba(24,35,53,.14)}
+.editor-screen{height:100%;display:flex;flex-direction:column;background:var(--bg)}
+.editor-header{height:calc(58px + env(safe-area-inset-top));padding:calc(env(safe-area-inset-top) + 10px) 18px 4px;display:flex;align-items:center;justify-content:space-between;flex:0 0 auto}
+.icon-button{width:44px;height:44px;display:grid;place-items:center;border-radius:50%;color:var(--ink-2)}
+.icon-button svg{width:23px;height:23px}
+.icon-button:active{background:rgba(24,35,53,.05)}
+.save-button{height:38px;padding:0 16px;border-radius:999px;background:var(--ink);color:#fff;font-size:14px;font-weight:650;letter-spacing:-.03em}
+.save-button:active{transform:scale(.97)}
+.editor-scroll{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:6px 18px 26px;scrollbar-width:none}
+.editor-scroll::-webkit-scrollbar{display:none}
+.paper-sheet{min-height:calc(100% - 2px);padding:24px 22px 28px;border:1px solid var(--line);border-radius:28px 28px 18px 18px;background:linear-gradient(180deg,#FFFEFC 0%,var(--paper) 100%);box-shadow:var(--shadow);display:flex;flex-direction:column}
+.paper-head{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;padding-bottom:18px;border-bottom:1px solid var(--line)}
+.category-pill{height:34px;padding:0 11px;border-radius:999px;display:inline-flex;align-items:center;gap:7px;background:var(--category-soft,#FFF0EA);color:var(--ink-2);font-size:13px;font-weight:560;letter-spacing:-.035em}
+.category-pill svg{width:14px;height:14px;color:#8F97A1}
+.category-icon{width:17px;height:17px;display:grid;place-items:center;color:var(--category-color,var(--orange))}
+.category-icon svg{width:17px;height:17px;stroke-width:1.7}
+.meta-copy{text-align:right;padding-top:2px;line-height:1.35}
+.meta-copy strong{display:block;font-size:13px;font-weight:580;letter-spacing:-.03em;color:var(--ink-2)}
+.meta-copy span{display:block;margin-top:4px;font-size:11px;color:var(--muted)}
+.standard-editor{display:flex;flex:1}
+#noteInput{width:100%;min-height:360px;flex:1;padding:24px 1px 14px;border:0;outline:0;resize:none;background:transparent;color:var(--ink);font-size:17px;line-height:1.82;font-weight:400;letter-spacing:-.035em}
+#noteInput::placeholder,.todo-input::placeholder,.todo-note::placeholder,.mind-name-field input::placeholder{color:#B1B7BE}
+.todo-editor{padding-top:22px}
+.todo-list{display:grid;gap:7px}
+.todo-row{display:grid;grid-template-columns:26px 1fr 26px;align-items:center;gap:8px;min-height:46px;border-bottom:1px solid #EEF0EC}
+.todo-check{width:21px;height:21px;border:1.5px solid #B8C0C7;border-radius:7px;display:grid;place-items:center;color:#fff}
+.todo-check.checked{background:var(--blue);border-color:var(--blue)}
+.todo-check.checked:after{content:"✓";font-size:13px;font-weight:700}
+.todo-input{height:44px;border:0;outline:0;background:transparent;font-size:16px;line-height:1.5;letter-spacing:-.03em}
+.todo-remove{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;color:#A4ABB2;font-size:18px}
+.add-todo,.plain-note-toggle,.mind-name-toggle{margin-top:14px;display:inline-flex;align-items:center;gap:7px;color:#66707D;font-size:13px;font-weight:520}
+.add-todo svg{width:17px;height:17px}
+.plain-note-toggle{margin-left:18px}
+.todo-note{width:100%;min-height:110px;margin-top:18px;padding:14px;border:1px solid var(--line);border-radius:16px;outline:0;resize:none;background:#FCFCFA;font-size:15px;line-height:1.65}
+.mind-name{margin-top:auto;padding-top:22px}
+.mind-name-toggle{margin:0}
+.mind-name-toggle .plus{font-size:17px;color:var(--purple)}
+.mind-name-field{margin-top:14px;padding:15px 16px;border:1px solid #E9E4F1;border-radius:17px;background:#FCFAFF}
+.mind-name-field label{display:block;font-size:12px;color:#7E718E;margin-bottom:9px}
+.mind-name-field input{width:100%;height:38px;padding:0;border:0;border-bottom:1px solid #DDD5E8;outline:0;background:transparent;font-size:15px}
+.attachment-preview{display:grid;gap:10px;margin-top:16px}
+.attachment-chip{display:flex;align-items:center;gap:9px;padding:11px 13px;border:1px solid var(--line);border-radius:14px;background:#FAFBF8;color:#67717F;font-size:13px}
+.attachment-chip svg{width:17px;height:17px}
+.editor-footer{flex:0 0 auto;padding:8px 18px calc(10px + env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(247,248,245,0),rgba(247,248,245,.98) 28%)}
+.tool-row{height:62px;padding:0 13px;display:flex;align-items:center;gap:8px;border:1px solid rgba(225,230,224,.96);border-radius:22px;background:rgba(255,255,255,.95);box-shadow:0 12px 34px rgba(24,35,53,.09);backdrop-filter:blur(18px)}
+.tool-button{min-width:64px;height:46px;padding:0 9px;border-radius:15px;display:flex;align-items:center;justify-content:center;gap:6px;color:#5F6874;font-size:12px;font-weight:520}
+.tool-button svg{width:20px;height:20px}
+.tool-button:active{background:#F1F4EF}
+.character-count{margin-left:auto;padding-right:6px;color:#A0A7AF;font-size:11px;white-space:nowrap}
+.sheet-backdrop{position:absolute;inset:0;z-index:50;display:flex;align-items:flex-end;background:rgba(17,25,37,.22);opacity:0;pointer-events:none;transition:.2s ease}
+.sheet-backdrop.show{opacity:1;pointer-events:auto}
+.bottom-sheet{width:100%;padding:10px 20px calc(24px + env(safe-area-inset-bottom));border-radius:28px 28px 0 0;background:#fff;transform:translateY(28px);transition:.26s var(--ease)}
+.sheet-backdrop.show .bottom-sheet{transform:translateY(0)}
+.sheet-handle{width:42px;height:4px;margin:0 auto 17px;border-radius:99px;background:#D8DDD7}
+.bottom-sheet h2{margin:0;font-size:20px;letter-spacing:-.045em}
+.bottom-sheet>p{margin:9px 0 18px;color:var(--muted);font-size:13px;line-height:1.5}
+.category-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.category-option{height:48px;padding:0 14px;border:1px solid var(--line);border-radius:15px;display:flex;align-items:center;gap:9px;background:#FCFCFA;font-size:14px;font-weight:540;text-align:left}
+.category-option.selected{border-color:color-mix(in srgb,var(--option-color) 34%,#fff);background:var(--option-soft)}
+.category-option .dot{width:8px;height:8px;border-radius:50%;background:var(--option-color)}
+.sheet-close{width:100%;height:48px;margin-top:16px;border-radius:15px;background:var(--ink);color:#fff;font-size:14px;font-weight:650}
+.tool-toast{position:absolute;z-index:70;left:50%;bottom:calc(92px + env(safe-area-inset-bottom));transform:translate(-50%,12px);padding:11px 15px;border-radius:999px;background:rgba(24,35,53,.94);color:#fff;font-size:12px;opacity:0;pointer-events:none;transition:.2s ease;white-space:nowrap}
+.tool-toast.show{opacity:1;transform:translate(-50%,0)}
+@media (max-width:360px){
+  .paper-sheet{padding-left:18px;padding-right:18px}
+  .meta-copy strong{font-size:12px}
+  .tool-button{min-width:58px;padding:0 6px}
+  .tool-button span{font-size:11px}
+}
+@media (min-width:431px){.app-shell{border-radius:34px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+
+/* Editor v2 — calmer, more compact, and aligned with Home */
+.editor-header{
+  padding-left:22px;
+  padding-right:22px;
+}
+.save-button{
+  height:40px;
+  padding:0 18px;
+  font-size:14px;
+  font-weight:700;
+}
+.editor-scroll{
+  padding:8px 20px 20px;
+}
+.paper-sheet{
+  position:relative;
+  min-height:min(68vh,610px);
+  padding:22px 22px 86px;
+  border-radius:32px 32px 22px 22px;
+}
+.paper-head{
+  align-items:center;
+  padding-bottom:16px;
+}
+.category-pill{
+  min-width:104px;
+  height:38px;
+  padding:0 13px;
+  gap:8px;
+  font-size:14px;
+  font-weight:650;
+}
+.meta-copy{
+  padding-top:0;
+}
+.meta-copy strong{
+  font-size:12px;
+  font-weight:600;
+}
+.meta-copy span{
+  margin-top:3px;
+  font-size:10.5px;
+}
+.standard-editor{
+  min-height:0;
+}
+#noteInput{
+  min-height:290px;
+  padding:28px 2px 18px;
+  font-size:17px;
+  line-height:1.78;
+}
+#noteInput::placeholder{
+  color:#B3B8BE;
+  font-weight:430;
+}
+.editor-friend{
+  position:absolute;
+  right:20px;
+  bottom:20px;
+  width:54px;
+  height:43px;
+  object-fit:contain;
+  opacity:.72;
+  pointer-events:none;
+}
+.editor-footer{
+  padding:7px 20px calc(10px + env(safe-area-inset-bottom));
+}
+.tool-row{
+  height:58px;
+  padding:0 12px;
+  gap:4px;
+  border-radius:22px;
+}
+.tool-button{
+  min-width:58px;
+  height:42px;
+  padding:0 8px;
+  gap:5px;
+  font-size:11.5px;
+}
+.tool-button svg{
+  width:19px;
+  height:19px;
+}
+.character-count{
+  padding-right:4px;
+  font-size:10.5px;
+}
+.todo-editor{
+  padding-top:20px;
+}
+.todo-input{
+  font-size:16px;
+}
+.mind-name{
+  margin-top:18px;
+  padding-top:0;
+}
+.attachment-preview{
+  margin-bottom:8px;
+}
+@media(max-width:360px){
+  .editor-scroll{
+    padding-left:14px;
+    padding-right:14px;
+  }
+  .paper-sheet{
+    min-height:min(66vh,570px);
+    padding:20px 18px 82px;
+  }
+  .category-pill{
+    min-width:96px;
+    font-size:13px;
+  }
+  #noteInput{
+    min-height:270px;
+    font-size:16.5px;
+  }
+  .editor-friend{
+    right:15px;
+    bottom:17px;
+    width:48px;
+    height:38px;
+  }
+  .tool-button{
+    min-width:54px;
+    padding:0 5px;
+  }
+}
+
+
+/* Editor Final polish */
+.paper-sheet{
+  min-height:min(66vh,560px)!important;
+  border-radius:30px 30px 20px 20px;
+}
+.meta-copy strong{
+  font-size:11px!important;
+  color:#6f7782;
+}
+.meta-copy span{
+  font-size:10px!important;
+  color:#9aa1ab;
+}
+#noteInput{
+  min-height:260px!important;
+}
+.editor-footer.keyboard-open{
+  display:none!important;
+}
+.todo-add{
+  margin-top:10px;
+  align-self:flex-start;
+}
+.editor-friend{
+  opacity:.68;
+}
+
+
+/* Editor Final v4 — checklist first */
+.todo-editor{
+  padding-top:18px !important;
+}
+.todo-list{
+  margin-top:0;
+}
+.add-todo{
+  margin-top:10px !important;
+}
+.plain-note-toggle{
+  margin-top:12px !important;
+}
+.todo-note{
+  margin-top:12px !important;
+}

@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>마음툭 · 요즘</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app-shell" id="app">
+    <section class="screen" id="screen">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">시간이 지나 다시 만난 이야기</p>
+          <h1>요즘</h1>
+        </div>
+        <button class="period-button" id="periodButton" type="button" aria-haspopup="listbox" aria-expanded="false">
+          <span id="periodLabel">최근 2주</span><span aria-hidden="true">⌄</span>
+        </button>
+      </header>
+
+      <div class="period-menu" id="periodMenu" role="listbox" aria-label="기간 선택">
+        <button class="period-option" type="button">최근 7일</button>
+        <button class="period-option active" type="button">최근 2주</button>
+        <button class="period-option" type="button">최근 한 달</button>
+        <button class="period-option" type="button">지난달</button>
+      </div>
+
+      <section class="summary-block">
+        <p class="summary-main">18개의 툭이 머물렀어요.</p>
+        <div class="fragment-summary" aria-label="마음 생각 조각별 툭 수">
+          <span><i class="piece-icon plain" aria-hidden="true"></i>7</span>
+          <span><i class="piece-icon daily" aria-hidden="true"></i>5</span>
+          <span><i class="piece-icon worry" aria-hidden="true"></i>2</span>
+          <span><i class="piece-icon moment" aria-hidden="true"></i>3</span>
+          <span><i class="piece-icon todo" aria-hidden="true"></i>1</span>
+        </div>
+      </section>
+
+      <section class="section-block topics-section">
+        <div class="section-head">
+          <h2>자주 만난 이야기</h2>
+          <p>기록 속에서 여러 번 마주친 말들이에요.</p>
+        </div>
+        <div class="topic-lines" id="topicGrid">
+          <button class="topic-line active" type="button" data-topic="산책"><strong>산책</strong><span>6툭</span></button>
+          <button class="topic-line" type="button" data-topic="엄마"><strong>엄마</strong><span>4툭</span></button>
+          <button class="topic-line" type="button" data-topic="커피"><strong>커피</strong><span>4툭</span></button>
+          <button class="topic-line" type="button" data-topic="퇴근"><strong>퇴근</strong><span>3툭</span></button>
+        </div>
+      </section>
+
+      <section class="section-block related-block" id="relatedBlock">
+        <div class="section-head inline">
+          <div>
+            <h2><span id="selectedTopic">산책</span>이 담긴 툭</h2>
+            <p>직접 남긴 문장으로 다시 만나요.</p>
+          </div>
+          <button class="text-button" type="button">모두 보기</button>
+        </div>
+        <div class="related-list" id="relatedList"></div>
+      </section>
+
+      <section class="section-block fragments-section">
+        <div class="section-head">
+          <h2>마음·생각 조각</h2>
+          <p>남길 때 골랐던 조각으로도 둘러볼 수 있어요.</p>
+        </div>
+        <div class="fragment-list">
+          <button type="button"><span><i class="piece-icon plain" aria-hidden="true"></i>그냥 툭</span><strong>7</strong></button>
+          <button type="button"><span><i class="piece-icon daily" aria-hidden="true"></i>일상</span><strong>5</strong></button>
+          <button type="button"><span><i class="piece-icon worry" aria-hidden="true"></i>고민</span><strong>2</strong></button>
+          <button type="button"><span><i class="piece-icon moment" aria-hidden="true"></i>문득</span><strong>3</strong></button>
+          <button type="button"><span><i class="piece-icon todo" aria-hidden="true"></i>할 일</span><strong>1</strong></button>
+        </div>
+      </section>
+
+      <section class="section-block calendar-section">
+        <div class="section-head inline">
+          <div>
+            <h2>툭이 머문 날</h2>
+            <p>하루마다 어떤 조각이 머물렀는지 보여요.</p>
+          </div>
+          <button class="text-button" type="button">7월</button>
+        </div>
+        <div class="calendar" aria-label="7월 툭 캘린더">
+          <div class="weekdays"><span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span></div>
+          <div class="calendar-grid" id="calendarGrid"></div>
+        </div>
+      </section>
+
+      <section class="section-block media-section">
+        <div class="section-head">
+          <h2>다른 방식으로 보기</h2>
+          <p>글 사이에 남긴 흔적만 따로 모아봐요.</p>
+        </div>
+        <div class="media-list">
+          <button type="button"><span class="media-icon photo" aria-hidden="true"></span><span><strong>사진이 있는 툭</strong><small>14개</small></span><span aria-hidden="true">›</span></button>
+          <button type="button"><span class="media-icon sketch" aria-hidden="true"></span><span><strong>손그림이 있는 툭</strong><small>8개</small></span><span aria-hidden="true">›</span></button>
+          <button type="button"><span class="media-icon link" aria-hidden="true"></span><span><strong>링크가 있는 툭</strong><small>5개</small></span><span aria-hidden="true">›</span></button>
+        </div>
+      </section>
+
+      <section class="section-block pair-section">
+        <div class="section-head">
+          <h2>함께 자주 만난 이야기</h2>
+          <p>같은 툭 안에서 함께 머문 말들이에요.</p>
+        </div>
+        <div class="pair-list">
+          <button type="button"><strong>산책 + 커피</strong><span>5툭</span></button>
+          <button type="button"><strong>엄마 + 저녁</strong><span>3툭</span></button>
+        </div>
+      </section>
+
+      <p class="closing-copy">오늘의 툭도<br />언젠가 여기에서 다시 만나요.</p>
+    </section>
+
+    <nav class="bottom-tabs" aria-label="하단 메뉴">
+      <button type="button"><span>⌂</span><small>홈</small></button>
+      <button type="button"><span>☷</span><small>툭로그</small></button>
+      <button class="active" type="button"><span>◌</span><small>요즘</small></button>
+      <button type="button"><span>⚙</span><small>설정</small></button>
+    </nav>
+  </main>
+  <script src="../../storage.js"></script>
+  <script src="../../router.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

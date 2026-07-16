@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 190" role="img" aria-label="일상 친구">
+
+<style>
+  .main{fill:none;stroke:#303030;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .fine{fill:none;stroke:#303030;stroke-width:1.45;stroke-linecap:round;stroke-linejoin:round}
+  .eye{fill:#303030}
+  .idea{fill:#F4C541}
+</style>
+
+<path class="main" d="M82 76C81 48 100 29 129 28C158 27 178 46 179 75C180 104 160 124 130 125C101 126 83 105 82 76Z"/><path class="main" d="M93 114C79 126 72 142 71 164"/><path class="main" d="M165 114C178 127 185 143 186 163"/><path class="main" d="M87 164C87 151 91 141 97 134"/><path class="main" d="M158 129C163 141 165 150 163 156C160 161 151 163 140 166C128 169 119 172 117 177C115 182 121 185 130 185C149 185 173 181 189 173"/><path class="fine" d="M28 164H71"/><path class="fine" d="M187 164H231"/><circle class="eye" cx="108" cy="74.3" r="2.6"/><circle class="eye" cx="131" cy="75.8" r="2.6"/><path class="fine" d="M110.5 98.3C118 101.4 126 101.3 133 98.2"/><circle class="idea" cx="198" cy="27" r="7"/><path class="fine" d="M181 42L190 31"/>
+</svg>

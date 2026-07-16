@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#F7F8F5" />
+  <title>마음툭 — 에디터 Final v4</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app-shell" id="app">
+    <section class="editor-screen" aria-label="마음툭 기록 입력">
+      <header class="editor-header">
+        <button class="icon-button" type="button" aria-label="뒤로 가기" id="backButton">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg>
+        </button>
+        <button class="save-button" type="button" id="saveButton">남기기</button>
+      </header>
+
+      <div class="editor-scroll" id="editorScroll">
+        <div class="paper-sheet" id="paperSheet">
+          <div class="paper-head">
+            <button class="category-pill" id="categoryPill" type="button" aria-label="카테고리 바꾸기">
+              <span class="category-icon" aria-hidden="true"></span>
+              <span class="category-name"></span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 10 4 4 4-4"/></svg>
+            </button>
+            <div class="meta-copy">
+              <strong id="dateText"></strong>
+              <span id="timeText"></span>
+            </div>
+          </div>
+
+          <div class="standard-editor" id="standardEditor">
+            <textarea id="noteInput" maxlength="3000" placeholder="지금 떠오른 것을 적어보세요." aria-label="기록 내용"></textarea>
+          </div>
+
+          <div class="todo-editor" id="todoEditor" hidden>
+            <div class="todo-list" id="todoList"></div>
+            <button type="button" class="add-todo" id="addTodoButton">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+              항목 추가
+            </button>
+            <button type="button" class="plain-note-toggle" id="plainNoteToggle">메모도 함께 남기기</button>
+            <textarea id="todoNote" class="todo-note" placeholder="필요한 메모를 덧붙여보세요." hidden></textarea>
+          </div>
+
+          <section class="mind-name" id="mindNameSection" hidden>
+            <button type="button" class="mind-name-toggle" id="mindNameToggle">
+              <span class="plus">＋</span>
+              이 마음에 이름 붙이기
+            </button>
+            <div class="mind-name-field" id="mindNameField" hidden>
+              <label for="mindNameInput">이 마음을 뭐라고 부를까요?</label>
+              <input id="mindNameInput" maxlength="20" placeholder="예: 서운함과 걱정 사이" />
+            </div>
+          </section>
+
+          <div class="attachment-preview" id="attachmentPreview" aria-live="polite"></div>
+          <img class="editor-friend" src="maeumi-base.svg" alt="" aria-hidden="true" />
+        </div>
+      </div>
+
+      <footer class="editor-footer">
+        <div class="tool-row" role="toolbar" aria-label="기록 도구">
+          <button type="button" class="tool-button" data-tool="photo">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="14" rx="2.5"/><circle cx="9" cy="10" r="1.6"/><path d="m5.5 17 4.1-4.2 3.2 3.2 2.2-2.1 3.5 3.1"/></svg>
+            <span>사진</span>
+          </button>
+          <button type="button" class="tool-button" data-tool="draw">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 18 1.2-4.4L15.6 3.2a1.7 1.7 0 0 1 2.4 0l2.8 2.8a1.7 1.7 0 0 1 0 2.4L10.4 18.8 6 20z"/><path d="m13.8 5 5.2 5.2M5.2 13.6l5.2 5.2"/></svg>
+            <span>손글씨</span>
+          </button>
+          <button type="button" class="tool-button" data-tool="link">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.5 13.5 13.5 10.5"/><path d="M8.2 16.8 6.6 18.4a4 4 0 0 1-5.7-5.7l3.2-3.2a4 4 0 0 1 5.7 0" transform="translate(3 0)"/><path d="m15.8 7.2 1.6-1.6a4 4 0 0 1 5.7 5.7l-3.2 3.2a4 4 0 0 1-5.7 0" transform="translate(-3 0)"/></svg>
+            <span>링크</span>
+          </button>
+          <span class="character-count" id="characterCount">0</span>
+        </div>
+      </footer>
+    </section>
+
+    <div class="sheet-backdrop" id="categorySheet" aria-hidden="true">
+      <section class="bottom-sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+        <div class="sheet-handle" aria-hidden="true"></div>
+        <h2 id="sheetTitle">기록의 방향</h2>
+        <p>지금 남기려는 기록과 가장 가까운 것을 골라보세요.</p>
+        <div class="category-list" id="categoryList"></div>
+        <button class="sheet-close" type="button" id="sheetClose">닫기</button>
+      </section>
+    </div>
+
+    <div class="tool-toast" id="toolToast" role="status" aria-live="polite"></div>
+  </main>
+  <script src="../../storage.js"></script>
+  <script src="../../router.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

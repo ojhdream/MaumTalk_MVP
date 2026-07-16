@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#F7F8F5" />
+  <title>마음툭 — 나</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <section class="screen my-screen" aria-label="나">
+      <header class="topbar">
+        <div><p class="eyebrow">내 기록</p><h1>나</h1></div>
+      </header>
+
+      <section class="account-card" id="loggedOutCard">
+        <div class="friend-mark" aria-hidden="true">
+          <span class="friend-head"></span><span class="friend-eye left"></span><span class="friend-eye right"></span><span class="friend-mouth"></span><span class="idea-dot"></span>
+        </div>
+        <div class="account-copy">
+          <h2>로그인하고 기록을 이어가세요.</h2>
+          <p>로그인하면 남긴 기록을 안전하게 보관하고<br>다른 기기에서도 이어서 볼 수 있어요.</p>
+        </div>
+        <div class="login-actions">
+          <button class="login-button kakao" id="kakaoLogin" type="button"><span class="kakao-symbol">●</span><span>카카오로 시작하기</span></button>
+          <button class="login-button google" id="googleLogin" type="button"><span class="google-symbol">G</span><span>Google로 시작하기</span></button>
+        </div>
+        <p class="account-note">로그인하면 이용약관과 개인정보처리방침에 동의하게 됩니다.</p>
+      </section>
+
+      <section class="account-card signed-in" id="loggedInCard" hidden>
+        <div class="profile-row">
+          <div class="profile-avatar">마</div>
+          <div class="profile-copy"><strong id="profileName">마음툭 사용자</strong><span id="profileProvider">카카오 계정으로 로그인됨</span></div>
+          <button class="text-button" id="accountManage" type="button">계정</button>
+        </div>
+        <div class="save-status"><span class="status-dot"></span><span>모든 기록이 안전하게 저장되고 있어요.</span></div>
+        <div class="mini-stats"><div><strong>37일</strong><span>기록한 날</span></div><div><strong>128개</strong><span>남긴 툭</span></div></div>
+      </section>
+
+      <section class="settings-section" aria-label="설정">
+        <h2>설정</h2>
+        <div class="settings-list">
+          <button class="setting-row" type="button"><span class="setting-icon">◌</span><span class="setting-label">알림</span><span class="setting-value">켜짐</span><span class="chevron">›</span></button>
+          <button class="setting-row signed-only" type="button" hidden><span class="setting-icon">↗</span><span class="setting-label">데이터 내보내기</span><span class="chevron">›</span></button>
+          <button class="setting-row" type="button"><span class="setting-icon">✉</span><span class="setting-label">문의하기</span><span class="chevron">›</span></button>
+          <button class="setting-row" type="button"><span class="setting-icon">ⓘ</span><span class="setting-label">앱 정보</span><span class="setting-value">v1.0</span><span class="chevron">›</span></button>
+          <button class="setting-row danger signed-only" id="logoutButton" type="button" hidden><span class="setting-icon">↳</span><span class="setting-label">로그아웃</span></button>
+        </div>
+      </section>
+
+      <footer class="brand-footer"><strong>마음툭</strong><span>마음이 움직일 때마다, 툭.</span><small>Version 1.0</small></footer>
+    </section>
+
+    <nav class="bottom-nav" aria-label="주요 메뉴">
+      <button class="nav-item" type="button"><svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5V21H7v-7h10v7"/></svg><span>오늘</span></button>
+      <button class="nav-item" type="button"><svg viewBox="0 0 24 24"><path d="M5 6h14M5 12h14M5 18h14"/></svg><span>툭로그</span></button>
+      <button class="nav-item" type="button"><svg viewBox="0 0 24 24"><path d="M4 13c2-5 4 5 7 0s5 5 9-1"/></svg><span>요즘</span></button>
+      <button class="nav-item active" type="button"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4.5 21c.6-4.2 3.1-6.5 7.5-6.5s6.9 2.3 7.5 6.5"/></svg><span>나</span></button>
+    </nav>
+    <div class="toast" id="toast"></div>
+  </main>
+  <script src="../../storage.js"></script>
+  <script src="../../router.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
