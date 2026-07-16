@@ -6,16 +6,16 @@ const ICONS={
  todo:'<svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="m8 12 2.5 2.5L16 9"/></svg>'
 };
 const fixedCategories=[
- {id:'plain',name:'그냥 툭',color:'#E77760',soft:'#FFF0EB',icon:'plain',friend:'friend-default.svg',hint:'생각나는 대로',examples:['오늘 저녁은 카레.','문득 이 노래가 생각났다.']},
- {id:'daily',name:'일상',color:'#3D9E69',soft:'#EAF6EE',icon:'daily',friend:'friend-daily.svg',hint:'오늘을 담담하게',examples:['퇴근길 하늘이 유난히 맑았다.','아이가 한 말이 자꾸 웃긴다.']},
- {id:'worry',name:'고민',color:'#9B6BC2',soft:'#F3ECF8',icon:'worry',friend:'friend-worry.svg',hint:'마음을 천천히',examples:['괜히 그 말이 신경 쓰인다.','이 선택이 맞을까.']},
- {id:'spark',name:'문득',color:'#D79A12',soft:'#FFF6DB',icon:'spark',friend:'friend-sudden.svg',hint:'스쳐간 생각',examples:['행복은 익숙한 순간에 오는 걸지도.','아침 산책을 하면 생각이 맑아진다.']},
- {id:'todo',name:'할 일',color:'#4F87C7',soft:'#EAF2FB',icon:'todo',friend:'friend-todo.svg',hint:'잊기 전에',examples:['택배 보내기.','엄마에게 전화하기.']}
+ {id:'plain',name:'\uADF8\uB0E5 \uD230',color:'#E77760',soft:'#FFF0EB',icon:'plain',friend:'friend-default.svg',hint:'\uC0DD\uAC01\uB098\uB294 \uB300\uB85C',examples:['\uC624\uB298 \uC800\uB141\uC740 \uCE74\uB808.','\uBB38\uB4DD \uC774 \uB178\uB798\uAC00 \uC0DD\uAC01\uB0AC\uB2E4.']},
+ {id:'daily',name:'\uC77C\uC0C1',color:'#3D9E69',soft:'#EAF6EE',icon:'daily',friend:'friend-daily.svg',hint:'\uC624\uB298\uC744 \uB2F4\uB2F4\uD558\uAC8C',examples:['\uD1F4\uADFC\uAE38 \uD558\uB298\uC774 \uC720\uB09C\uD788 \uB9D1\uC558\uB2E4.','\uC544\uC774\uAC00 \uD55C \uB9D0\uC774 \uC790\uAFB8 \uC6C3\uAE34\uB2E4.']},
+ {id:'worry',name:'\uACE0\uBBFC',color:'#9B6BC2',soft:'#F3ECF8',icon:'worry',friend:'friend-worry.svg',hint:'\uB9C8\uC74C\uC744 \uCC9C\uCC9C\uD788',examples:['\uAD1C\uD788 \uADF8 \uB9D0\uC774 \uC2E0\uACBD \uC4F0\uC778\uB2E4.','\uC774 \uC120\uD0DD\uC774 \uB9DE\uC744\uAE4C.']},
+ {id:'spark',name:'\uBB38\uB4DD',color:'#D79A12',soft:'#FFF6DB',icon:'spark',friend:'friend-sudden.svg',hint:'\uC2A4\uCCD0\uAC04 \uC0DD\uAC01',examples:['\uD589\uBCF5\uC740 \uC775\uC219\uD55C \uC21C\uAC04\uC5D0 \uC624\uB294 \uAC78\uC9C0\uB3C4.','\uC544\uCE68 \uC0B0\uCC45\uC744 \uD558\uBA74 \uC0DD\uAC01\uC774 \uB9D1\uC544\uC9C4\uB2E4.']},
+ {id:'todo',name:'\uD560 \uC77C',color:'#4F87C7',soft:'#EAF2FB',icon:'todo',friend:'friend-todo.svg',hint:'\uC78A\uAE30 \uC804\uC5D0',examples:['\uD0DD\uBC30 \uBCF4\uB0B4\uAE30.','\uC5C4\uB9C8\uC5D0\uAC8C \uC804\uD654\uD558\uAE30.']}
 ];
 const DEMO_RECORDS=[
- {id:'demo-1',text:'퇴근길 하늘이 유난히 맑았다.',category:'일상',categoryId:'daily',color:'#3D9E69',soft:'#EAF6EE',icon:'daily',time:'오후 8:41'},
- {id:'demo-2',text:'아침 산책을 하면 생각이 맑아진다.',category:'문득',categoryId:'spark',color:'#D79A12',soft:'#FFF6DB',icon:'spark',time:'오후 7:12'},
- {id:'demo-3',text:'오늘 저녁은 카레.',category:'그냥 툭',categoryId:'plain',color:'#E77760',soft:'#FFF0EB',icon:'plain',time:'오후 6:03'}
+ {id:'demo-1',text:'\uD1F4\uADFC\uAE38 \uD558\uB298\uC774 \uC720\uB09C\uD788 \uB9D1\uC558\uB2E4.',category:'\uC77C\uC0C1',categoryId:'daily',color:'#3D9E69',soft:'#EAF6EE',icon:'daily',time:'\uC624\uD6C4 8:41'},
+ {id:'demo-2',text:'\uC544\uCE68 \uC0B0\uCC45\uC744 \uD558\uBA74 \uC0DD\uAC01\uC774 \uB9D1\uC544\uC9C4\uB2E4.',category:'\uBB38\uB4DD',categoryId:'spark',color:'#D79A12',soft:'#FFF6DB',icon:'spark',time:'\uC624\uD6C4 7:12'},
+ {id:'demo-3',text:'\uC624\uB298 \uC800\uB141\uC740 \uCE74\uB808.',category:'\uADF8\uB0E5 \uD230',categoryId:'plain',color:'#E77760',soft:'#FFF0EB',icon:'plain',time:'\uC624\uD6C4 6:03'}
 ];
 function storageRecordToHome(record){
  const cat=fixedCategories.find(item=>item.id===record.category)||fixedCategories[0];
@@ -35,7 +35,7 @@ const CTA_COPY={
  todo:'\uC78A\uAE30 \uC804\uC5D0, \uD230 \uAE30\uB85D\uD574\uBCFC\uAE4C?'
 };
 function escapeHTML(v=''){return String(v).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
-function formatDate(d){return `${d.getMonth()+1}월 ${d.getDate()}일 ${['일요일','월요일','화요일','수요일','목요일','금요일','토요일'][d.getDay()]}`}
+function formatDate(d){return `${d.getMonth()+1}\uC6D4 ${d.getDate()}\uC77C ${['\uC77C\uC694\uC77C','\uC6D4\uC694\uC77C','\uD654\uC694\uC77C','\uC218\uC694\uC77C','\uBAA9\uC694\uC77C','\uAE08\uC694\uC77C','\uD1A0\uC694\uC77C'][d.getDay()]}`}
 function formatTime(d){return d.toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit',hour12:true})}
 function icon(cat,cls='category-icon'){return `<span class="${cls}">${ICONS[cat.icon]||ICONS.plain}</span>`}
 function applyDate(){const n=new Date();$('#todayDate').textContent=formatDate(n);$('#editorDay').textContent=formatDate(n);$('#editorTimestamp').textContent=formatTime(n)}
