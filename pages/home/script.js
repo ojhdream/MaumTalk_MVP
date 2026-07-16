@@ -6,7 +6,7 @@ const ICONS={
  todo:'<svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="m8 12 2.5 2.5L16 9"/></svg>'
 };
 const fixedCategories=[
- {id:'plain',name:'\uADF8\uB0E5 \uD230',color:'#E77760',soft:'#FFF0EB',icon:'plain',friend:'friend-default.svg',hint:'\uC0DD\uAC01\uB098\uB294 \uB300\uB85C',examples:['\uC624\uB298 \uC800\uB141\uC740 \uCE74\uB808.','\uBB38\uB4DD \uC774 \uB178\uB798\uAC00 \uC0DD\uAC01\uB0AC\uB2E4.']},
+ {id:'plain',name:'\uADF8\uB0E5 \uD22D',color:'#E77760',soft:'#FFF0EB',icon:'plain',friend:'friend-default.svg',hint:'\uC0DD\uAC01\uB098\uB294 \uB300\uB85C',examples:['\uC624\uB298 \uC800\uB141\uC740 \uCE74\uB808.','\uBB38\uB4DD \uC774 \uB178\uB798\uAC00 \uC0DD\uAC01\uB0AC\uB2E4.']},
  {id:'daily',name:'\uC77C\uC0C1',color:'#3D9E69',soft:'#EAF6EE',icon:'daily',friend:'friend-daily.svg',hint:'\uC624\uB298\uC744 \uB2F4\uB2F4\uD558\uAC8C',examples:['\uD1F4\uADFC\uAE38 \uD558\uB298\uC774 \uC720\uB09C\uD788 \uB9D1\uC558\uB2E4.','\uC544\uC774\uAC00 \uD55C \uB9D0\uC774 \uC790\uAFB8 \uC6C3\uAE34\uB2E4.']},
  {id:'worry',name:'\uACE0\uBBFC',color:'#9B6BC2',soft:'#F3ECF8',icon:'worry',friend:'friend-worry.svg',hint:'\uB9C8\uC74C\uC744 \uCC9C\uCC9C\uD788',examples:['\uAD1C\uD788 \uADF8 \uB9D0\uC774 \uC2E0\uACBD \uC4F0\uC778\uB2E4.','\uC774 \uC120\uD0DD\uC774 \uB9DE\uC744\uAE4C.']},
  {id:'spark',name:'\uBB38\uB4DD',color:'#D79A12',soft:'#FFF6DB',icon:'spark',friend:'friend-sudden.svg',hint:'\uC2A4\uCCD0\uAC04 \uC0DD\uAC01',examples:['\uD589\uBCF5\uC740 \uC775\uC219\uD55C \uC21C\uAC04\uC5D0 \uC624\uB294 \uAC78\uC9C0\uB3C4.','\uC544\uCE68 \uC0B0\uCC45\uC744 \uD558\uBA74 \uC0DD\uAC01\uC774 \uB9D1\uC544\uC9C4\uB2E4.']},
@@ -15,7 +15,7 @@ const fixedCategories=[
 const DEMO_RECORDS=[
  {id:'demo-1',text:'\uD1F4\uADFC\uAE38 \uD558\uB298\uC774 \uC720\uB09C\uD788 \uB9D1\uC558\uB2E4.',category:'\uC77C\uC0C1',categoryId:'daily',color:'#3D9E69',soft:'#EAF6EE',icon:'daily',time:'\uC624\uD6C4 8:41'},
  {id:'demo-2',text:'\uC544\uCE68 \uC0B0\uCC45\uC744 \uD558\uBA74 \uC0DD\uAC01\uC774 \uB9D1\uC544\uC9C4\uB2E4.',category:'\uBB38\uB4DD',categoryId:'spark',color:'#D79A12',soft:'#FFF6DB',icon:'spark',time:'\uC624\uD6C4 7:12'},
- {id:'demo-3',text:'\uC624\uB298 \uC800\uB141\uC740 \uCE74\uB808.',category:'\uADF8\uB0E5 \uD230',categoryId:'plain',color:'#E77760',soft:'#FFF0EB',icon:'plain',time:'\uC624\uD6C4 6:03'}
+ {id:'demo-3',text:'\uC624\uB298 \uC800\uB141\uC740 \uCE74\uB808.',category:'\uADF8\uB0E5 \uD22D',categoryId:'plain',color:'#E77760',soft:'#FFF0EB',icon:'plain',time:'\uC624\uD6C4 6:03'}
 ];
 function storageRecordToHome(record){
  const cat=fixedCategories.find(item=>item.id===record.category)||fixedCategories[0];
@@ -28,17 +28,17 @@ let selected=null;
 const $=s=>document.querySelector(s);
 const els={fixed:$('#fixedCategoryGrid'),label:$('#selectedLabel'),hint:$('#selectedHint'),examples:$('#composerExamples'),cta:null,card:$('#composerCard'),friend:document.querySelector('.friend'),friendImage:$('#friendImage'),friendCta:$('#friendCta'),editor:$('#editorScreen'),editorText:$('#editorText'),editorCategory:$('#editorCategory'),charCount:$('#charCount'),recent:$('#recentList'),clone:$('#expandClone'),toast:$('#toast')};
 const CTA_COPY={
- plain:'\uC0DD\uAC01\uB098\uB294 \uB300\uB85C, \uD230 \uAE30\uB85D\uD574\uBCFC\uAE4C?',
- daily:'\uC624\uB298\uC744 \uB2F4\uB2F4\uD558\uAC8C, \uD230 \uAE30\uB85D\uD574\uBCFC\uAE4C?',
- worry:'\uB9C8\uC74C\uC744 \uCC9C\uCC9C\uD788, \uD230 \uAE30\uB85D\uD574\uBCFC\uAE4C?',
- spark:'\uC2A4\uCCD0\uAC04 \uC0DD\uAC01, \uD230 \uAE30\uB85D\uD574\uBCFC\uAE4C?',
- todo:'\uC78A\uAE30 \uC804\uC5D0, \uD230 \uAE30\uB85D\uD574\uBCFC\uAE4C?'
+ plain:'\uC0DD\uAC01\uB098\uB294 \uB300\uB85C, \uD22D \uAE30\uB85D\uD574\uBCFC\uAE4C?',
+ daily:'\uC624\uB298\uC744 \uB2F4\uB2F4\uD558\uAC8C, \uD22D \uAE30\uB85D\uD574\uBCFC\uAE4C?',
+ worry:'\uB9C8\uC74C\uC744 \uCC9C\uCC9C\uD788, \uD22D \uAE30\uB85D\uD574\uBCFC\uAE4C?',
+ spark:'\uC2A4\uCCD0\uAC04 \uC0DD\uAC01, \uD22D \uAE30\uB85D\uD574\uBCFC\uAE4C?',
+ todo:'\uC78A\uAE30 \uC804\uC5D0, \uD22D \uAE30\uB85D\uD574\uBCFC\uAE4C?'
 };
 function escapeHTML(v=''){return String(v).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
 function formatDate(d){return `${d.getMonth()+1}\uC6D4 ${d.getDate()}\uC77C ${['\uC77C\uC694\uC77C','\uC6D4\uC694\uC77C','\uD654\uC694\uC77C','\uC218\uC694\uC77C','\uBAA9\uC694\uC77C','\uAE08\uC694\uC77C','\uD1A0\uC694\uC77C'][d.getDay()]}`}
 function formatTime(d){return d.toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit',hour12:true})}
 function icon(cat,cls='category-icon'){return `<span class="${cls}">${ICONS[cat.icon]||ICONS.plain}</span>`}
-function applyDate(){const n=new Date();$('#todayDate').textContent=formatDate(n);$('#homePrompt').textContent='\uC624\uB298, \uD230 \uB0A8\uACA8\uBCFC\uAE4C\uC694?';$('#editorDay').textContent=formatDate(n);$('#editorTimestamp').textContent=formatTime(n)}
+function applyDate(){const n=new Date();$('#todayDate').textContent=formatDate(n);$('#homePrompt').textContent='\uC624\uB298, \uD22D \uB0A8\uACA8\uBCFC\uAE4C\uC694?';$('#editorDay').textContent=formatDate(n);$('#editorTimestamp').textContent=formatTime(n)}
 function chipMarkup(cat){const isSelected=selected?.id===cat.id;const name=`<span class="category-name">${escapeHTML(cat.name)}</span>`;return `<button type="button" role="option" aria-selected="${isSelected}" class="category-chip ${cat.id==='plain'?'plain-chip':''} ${isSelected?'selected':''}" data-id="${cat.id}" style="--cat-color:${cat.color};--cat-soft:${cat.soft}">${icon(cat)}${name}</button>`}
 function renderCategories(){
  els.fixed.innerHTML=fixedCategories.map(chipMarkup).join('');
@@ -63,7 +63,7 @@ function nudgeComposerCta(){
 }
 function setComposerCta(category){
  const label=els.friendCta?.querySelector('span:first-child');
- if(label)label.textContent=CTA_COPY[category?.id]||'\uD230, \uAE30\uB85D\uD574\uBCFC\uAE4C?';
+ if(label)label.textContent=CTA_COPY[category?.id]||'\uD22D, \uAE30\uB85D\uD574\uBCFC\uAE4C?';
 }
 function selectCategory(id){
  selected=fixedCategories.find(cat=>cat.id===id)||null;
