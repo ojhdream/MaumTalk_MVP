@@ -1329,11 +1329,11 @@ svg{display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:
   border:0 !important;
   background:var(--cat-soft) !important;
   box-shadow:none !important;
-  color:#4E5866 !important;
-  font-size:13.5px !important;
-  font-weight:520 !important;
+  color:#354052 !important;
+  font-size:14px !important;
+  font-weight:540 !important;
   letter-spacing:-.025em !important;
-  opacity:.86;
+  opacity:1;
   scroll-snap-align:start;
 }
 .category-chip .category-icon{
@@ -1374,10 +1374,10 @@ svg{display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:
   margin-top:0 !important;
   padding-right:12px !important;
   gap:6px !important;
-  color:#596272 !important;
-  font-size:14px !important;
+  color:#3E4858 !important;
+  font-size:14.5px !important;
   line-height:1.45 !important;
-  font-weight:460 !important;
+  font-weight:500 !important;
 }
 .example-line{
   gap:7px !important;
@@ -1401,10 +1401,10 @@ svg{display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:
   gap:6px !important;
   border:0 !important;
   border-radius:999px !important;
-  background:rgba(255,255,255,.64) !important;
-  color:#68717E !important;
-  font-size:13.5px !important;
-  font-weight:580 !important;
+  background:rgba(255,255,255,.82) !important;
+  color:#3E4858 !important;
+  font-size:14px !important;
+  font-weight:590 !important;
   line-height:1 !important;
   letter-spacing:-.025em !important;
   white-space:nowrap !important;
@@ -1415,14 +1415,14 @@ svg{display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:
   border-color:color-mix(in srgb,var(--cat-color) 18%, #fff) !important;
   background:var(--cat-soft) !important;
   color:var(--cat-color) !important;
-  font-weight:620 !important;
+  font-weight:640 !important;
 }
 .composer-card-friend{
   right:14px !important;
   bottom:55px !important;
   width:60px !important;
   height:47px !important;
-  opacity:.9;
+  opacity:1;
 }
 .section-head h2{
   font-size:16px !important;
@@ -1446,9 +1446,9 @@ svg{display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:
   }
   .category-chip,
   .category-chip.plain-chip{
-    height:34px !important;
+    height:35px !important;
     padding:0 11px !important;
-    font-size:13px !important;
+    font-size:13.5px !important;
     gap:5px !important;
   }
   .category-chip .category-icon{
@@ -1464,7 +1464,7 @@ svg{display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:
     padding-right:68px !important;
   }
   .composer-examples{
-    font-size:13.5px !important;
+    font-size:14px !important;
     gap:5px !important;
   }
   .composer-card-cta{
@@ -1472,7 +1472,7 @@ svg{display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:
     bottom:13px !important;
     height:34px !important;
     padding:0 12px !important;
-    font-size:13px !important;
+    font-size:13.5px !important;
   }
   .composer-card-friend{
     right:11px !important;
