@@ -1244,6 +1244,11 @@ svg{display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:
   padding-top:calc(env(safe-area-inset-top) + 18px) !important;
 }
 .topbar{
+  display:flex !important;
+  justify-content:flex-start !important;
+  margin-bottom:18px !important;
+}
+.brand-subtitle{
   display:none !important;
 }
 .today-date{

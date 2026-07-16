@@ -38,7 +38,7 @@ function escapeHTML(v=''){return String(v).replace(/[&<>'"]/g,c=>({'&':'&amp;','
 function formatDate(d){return `${d.getMonth()+1}\uC6D4 ${d.getDate()}\uC77C ${['\uC77C\uC694\uC77C','\uC6D4\uC694\uC77C','\uD654\uC694\uC77C','\uC218\uC694\uC77C','\uBAA9\uC694\uC77C','\uAE08\uC694\uC77C','\uD1A0\uC694\uC77C'][d.getDay()]}`}
 function formatTime(d){return d.toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit',hour12:true})}
 function icon(cat,cls='category-icon'){return `<span class="${cls}">${ICONS[cat.icon]||ICONS.plain}</span>`}
-function applyDate(){const n=new Date();$('#todayDate').textContent=formatDate(n);$('#editorDay').textContent=formatDate(n);$('#editorTimestamp').textContent=formatTime(n)}
+function applyDate(){const n=new Date();$('#todayDate').textContent=formatDate(n);$('#homePrompt').textContent='\uC624\uB298, \uD230 \uB0A8\uACA8\uBCFC\uAE4C\uC694?';$('#editorDay').textContent=formatDate(n);$('#editorTimestamp').textContent=formatTime(n)}
 function chipMarkup(cat){const isSelected=selected?.id===cat.id;const name=`<span class="category-name">${escapeHTML(cat.name)}</span>`;return `<button type="button" role="option" aria-selected="${isSelected}" class="category-chip ${cat.id==='plain'?'plain-chip':''} ${isSelected?'selected':''}" data-id="${cat.id}" style="--cat-color:${cat.color};--cat-soft:${cat.soft}">${icon(cat)}${name}</button>`}
 function renderCategories(){
  els.fixed.innerHTML=fixedCategories.map(chipMarkup).join('');
