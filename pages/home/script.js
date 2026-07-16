@@ -17,13 +17,16 @@ const DEMO_RECORDS=[
  {id:'demo-2',text:'아침 산책을 하면 생각이 맑아진다.',category:'문득',categoryId:'spark',color:'#D79A12',soft:'#FFF6DB',icon:'spark',time:'오후 7:12'},
  {id:'demo-3',text:'오늘 저녁은 카레.',category:'그냥 툭',categoryId:'plain',color:'#E77760',soft:'#FFF0EB',icon:'plain',time:'오후 6:03'}
 ];
-const storedRecords=safeParse('maumtalk.records',null);
-let isDemoMode=storedRecords===null;
-let records=isDemoMode?DEMO_RECORDS.slice():storedRecords;
+function storageRecordToHome(record){
+ const cat=fixedCategories.find(item=>item.id===record.category)||fixedCategories[0];
+ return {id:record.id,text:record.content,category:cat.name,categoryId:cat.id,color:cat.color,soft:cat.soft,icon:cat.icon,time:formatTime(new Date(record.createdAt))};
+}
+const storedRecords=Storage.getAll();
+let isDemoMode=storedRecords.length===0;
+let records=isDemoMode?DEMO_RECORDS.slice():storedRecords.map(storageRecordToHome);
 let selected=null;
 const $=s=>document.querySelector(s);
 const els={fixed:$('#fixedCategoryGrid'),label:$('#selectedLabel'),hint:$('#selectedHint'),examples:$('#composerExamples'),cta:null,card:$('#composerCard'),friend:document.querySelector('.friend'),friendImage:$('#friendImage'),friendCta:$('#friendCta'),editor:$('#editorScreen'),editorText:$('#editorText'),editorCategory:$('#editorCategory'),charCount:$('#charCount'),recent:$('#recentList'),clone:$('#expandClone'),toast:$('#toast')};
-function safeParse(key,fallback){try{return JSON.parse(localStorage.getItem(key)||JSON.stringify(fallback))}catch{return fallback}}
 function escapeHTML(v=''){return String(v).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
 function formatDate(d){return `${d.getMonth()+1}월 ${d.getDate()}일 ${['일요일','월요일','화요일','수요일','목요일','금요일','토요일'][d.getDay()]}`}
 function formatTime(d){return d.toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit',hour12:true})}
@@ -76,9 +79,9 @@ function closeEditor(){els.editor.classList.remove('show');els.editor.setAttribu
 function saveEditor(){
  const text=els.editorText.value.trim();
  if(!text){showToast('한 글자만 남겨도 괜찮아요.');return}
- const newRecord={id:Date.now(),text,category:selected.name,categoryId:selected.id,color:selected.color,soft:selected.soft,icon:selected.icon,time:formatTime(new Date())};
+ const newRecord=storageRecordToHome(Storage.save({category:selected.id,content:text,todos:[],tags:[],attachments:[]}));
  if(isDemoMode){records=[newRecord];isDemoMode=false}else{records.unshift(newRecord)}
- records=records.slice(0,50);localStorage.setItem('maumtalk.records',JSON.stringify(records));
+ records=records.slice(0,50);
  els.editorText.value='';els.charCount.textContent='0';renderRecords();closeEditor();showToast('잘 두었어요.');
 }
 function renderRecords(){

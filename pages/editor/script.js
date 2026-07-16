@@ -132,6 +132,33 @@ document.querySelectorAll('.tool-button').forEach(button=>{
 });
 
 document.getElementById('saveButton').addEventListener('click',()=>showToast('툭, 남겨지는 흐름만 확인해요.'));
+function collectTodos(){
+  return Array.from(todoList.querySelectorAll('.todo-row')).map(row=>({
+    text: row.querySelector('.todo-input')?.value.trim() || '',
+    done: row.querySelector('.todo-check')?.classList.contains('checked') || false
+  })).filter(todo=>todo.text);
+}
+
+function saveRecord(){
+  const todos = activeCategory.id === 'todo' ? collectTodos() : [];
+  const content = activeCategory.id === 'todo' ? (todoNote.value.trim() || todos.map(todo=>todo.text).join('\n')) : noteInput.value.trim();
+  if(content || todos.length){
+    Storage.save({
+      category: activeCategory.id,
+      content,
+      todos,
+      tags: [],
+      attachments: attachmentPreview.children.length ? [{ type: 'tool' }] : []
+    });
+    noteInput.value = '';
+    todoNote.value = '';
+    todoList.innerHTML = '';
+    characterCount.textContent = '0';
+    if(activeCategory.id === 'todo') addTodoRow(false);
+  }
+}
+
+document.getElementById('saveButton').addEventListener('click',saveRecord,true);
 document.getElementById('backButton').addEventListener('click',()=>{
   if(history.length > 1) history.back();
   else showToast('홈으로 돌아갈 수 있도록 연결해 주세요.');

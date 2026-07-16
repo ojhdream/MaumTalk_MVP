@@ -51,10 +51,20 @@ function iconMarkup(type){
   return `<span class="mark-icon"><i class="piece-icon ${type}" aria-hidden="true"></i></span>`;
 }
 
+function latestTopicCopies(topic){
+  const records = Storage.getAll();
+  if(!records.length) return topicCopies[topic];
+  return records.slice(0,3).map((record)=>[
+    record.category,
+    record.content || record.todos?.map(todo=>todo.text||todo[0]).filter(Boolean).join('\n') || '',
+    new Date(record.createdAt).toLocaleDateString('ko-KR',{month:'numeric',day:'numeric'}) + ' 쨌 ' + new Date(record.createdAt).toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'})
+  ]);
+}
+
 function renderTopic(topic){
   selectedTopic.textContent = topic;
   const list = document.getElementById('relatedList');
-  list.innerHTML = topicCopies[topic].map(([type, copy, time]) => `
+  list.innerHTML = latestTopicCopies(topic).map(([type, copy, time]) => `
     <article class="related-item">
       ${iconMarkup(type)}
       <div><p>${copy}</p><time>${time}</time></div>

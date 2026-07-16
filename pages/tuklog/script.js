@@ -1,4 +1,4 @@
-const records=[
+const demoRecords=[
  {id:1,date:'2026-07-14T20:41:00',type:'daily',icon:'⌁',text:'퇴근길 하늘이 유난히 예뻤다.\n잠깐 멈춰 사진을 찍었다.\n별일 없던 하루였는데 괜히 오래 기억날 것 같다.',media:'photo',attachments:1},
  {id:2,date:'2026-07-14T15:18:00',type:'spark',icon:'✦',text:'마음은 해결보다 이름이 먼저일지도.\n무엇이 힘든지 이름을 붙이면 아주 조금 멀리서 볼 수 있을 것 같다.\n오늘 떠오른 구조를 손으로 그려두었다.',media:'sketch',attachments:1},
  {id:3,date:'2026-07-14T09:12:00',type:'todo',icon:'✓',text:'엄마에게 전화하기',todos:[['우체국 들르기',true],['엄마에게 전화하기',false],['저녁 먹고 일지 남기기',false],['세탁기 돌리기',true],['화분 물주기',false]]},
@@ -12,6 +12,12 @@ const records=[
  {id:11,date:'2026-07-03T21:05:00',type:'daily',icon:'⌁',text:'비 냄새가 좋았다.\n창문을 조금 열어두었다.'},
  {id:12,date:'2026-07-01T10:36:00',type:'spark',icon:'✦',text:'작게 시작하면 계속할 수 있다.\n완벽하게 하려는 마음이 시작을 늦춘다.'}
 ];
+function storageRecordToLog(record){
+ const type=record.category||'plain';
+ const fallback=demoRecords.find(item=>item.type===type)||demoRecords[0];
+ return {id:record.id,date:record.createdAt,type,icon:fallback?.icon||'',text:record.content||record.todos?.map(todo=>todo.text||todo[0]).filter(Boolean).join('\n')||'',todos:record.todos?.map(todo=>Array.isArray(todo)?todo:[todo.text,todo.done])||[],attachments:record.attachments?.length||0};
+}
+const records=Storage.getAll().map(storageRecordToLog);
 const meta={plain:{label:'그냥 툭',color:'#FF8556'},daily:{label:'일상',color:'#38A66B'},worry:{label:'고민',color:'#9877D8'},spark:{label:'문득',color:'#D9A700'},todo:{label:'할 일',color:'#69A8EA'}};
 const timeline=document.getElementById('timeline'),emptyResult=document.getElementById('emptyResult'),memoryCard=document.getElementById('memoryCard'),logScreen=document.getElementById('logScreen'),fab=document.getElementById('fab');
 let currentFilter='all',currentMonth=6,selectedDay=14,isCalendar=false;
@@ -37,7 +43,7 @@ function recordHtml(r,mini=false){const m=meta[r.type];if(mini)return `<button c
  </article>`}
 function renderList(filter=currentFilter,query=''){
  const q=query.trim().toLowerCase();const filtered=records.filter(r=>(filter==='all'||r.type===filter)&&(!q||`${r.text} ${meta[r.type].label}`.toLowerCase().includes(q)));
- timeline.innerHTML='';emptyResult.hidden=filtered.length>0;memoryCard.style.display=(q||filter!=='all')?'none':'';
+ timeline.innerHTML='';emptyResult.hidden=filtered.length>0;memoryCard.style.display=(q||filter!=='all'||!records.length)?'none':'';
  const groups=[...new Set(filtered.map(r=>groupLabel(r.date)))];
  groups.forEach(label=>{const items=filtered.filter(r=>groupLabel(r.date)===label);const sec=document.createElement('section');sec.className='day-group';sec.innerHTML=`<div class="day-divider"><div></div><div class="day-copy"><strong>${label}</strong><span>${items.length}개의 툭</span></div><div></div></div><div class="record-list">${items.map(r=>recordHtml(r)).join('')}</div>`;timeline.appendChild(sec)});
  bindRecords(timeline)
