@@ -1634,7 +1634,8 @@ svg{display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:
   margin-bottom:16px !important;
 }
 .section-head h2{
-  font-size:18.5px !important;
+  font-size:16.5px !important;
+  font-weight:600 !important;
 }
 
 @media(max-width:365px){
