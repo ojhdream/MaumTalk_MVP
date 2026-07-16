@@ -74,6 +74,7 @@ function selectCategory(id){
  els.hint.style.display='none';
  els.examples.innerHTML=selected.examples.slice(0,2).map(text=>`<div class="example-line"><span class="example-quote">“</span><span>${escapeHTML(text)}</span></div>`).join('');
  els.card.style.setProperty('--cat-color',selected.color);
+ els.card.style.setProperty('--cat-soft',selected.soft);
  els.card.classList.add('is-ready');
  els.card.setAttribute('aria-label',`${selected.name}으로 기록하기`);
  setComposerCta(selected);
