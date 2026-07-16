@@ -1524,15 +1524,15 @@ svg{display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:
 }
 .category-chip[data-id="daily"]{
   order:2;
-  grid-column:span 3 !important;
+  grid-column:span 2 !important;
 }
 .category-chip[data-id="plain"]{
   order:1;
-  grid-column:span 3 !important;
+  grid-column:span 2 !important;
 }
 .category-chip[data-id="spark"]{
   order:4;
-  grid-column:span 2 !important;
+  grid-column:2 / span 2 !important;
 }
 .category-chip[data-id="worry"]{
   order:3;
@@ -1540,7 +1540,7 @@ svg{display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:
 }
 .category-chip[data-id="todo"]{
   order:5;
-  grid-column:span 2 !important;
+  grid-column:4 / span 2 !important;
 }
 .category-chip.selected{
   background:color-mix(in srgb,var(--cat-soft) 86%, #fff) !important;
