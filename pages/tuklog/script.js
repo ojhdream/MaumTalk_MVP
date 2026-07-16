@@ -112,3 +112,23 @@ listView.addEventListener('click',event=>{
  if(event.target.closest('[data-empty-cta="tuklog"]')){event.preventDefault();MaumTalkRouter.navigate('editor')}
 });
 renderTuklogEmptyState();
+renderList=function(filter=currentFilter,query=''){
+ const q=query.trim().toLowerCase();
+ const hasAnyRecords=Storage.getAll().length>0;
+ const wholeEmpty=document.querySelector('[data-empty-state="tuklog"]');
+ if(!hasAnyRecords){
+   timeline.innerHTML='';
+   emptyResult.hidden=true;
+   memoryCard.style.display='none';
+   if(!wholeEmpty)renderTuklogEmptyState();
+   return;
+ }
+ wholeEmpty?.remove();
+ const filtered=records.filter(r=>(filter==='all'||r.type===filter)&&(!q||`${r.text} ${meta[r.type].label}`.toLowerCase().includes(q)));
+ timeline.innerHTML='';
+ emptyResult.hidden=filtered.length>0;
+ memoryCard.style.display=(q||filter!=='all')?'none':'';
+ const groups=[...new Set(filtered.map(r=>groupLabel(r.date)))];
+ groups.forEach(label=>{const items=filtered.filter(r=>groupLabel(r.date)===label);const sec=document.createElement('section');sec.className='day-group';sec.innerHTML=`<div class="day-divider"><div></div><div class="day-copy"><strong>${label}</strong><span>${items.length}개의 툭</span></div><div></div></div><div class="record-list">${items.map(r=>recordHtml(r)).join('')}</div>`;timeline.appendChild(sec)});
+ bindRecords(timeline);
+};
