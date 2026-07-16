@@ -1239,7 +1239,7 @@ svg{display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:
   .composer-examples{margin-top:10px}
 }
 
-/* Compact home start: date, prompt, two-row categories, one sample. */
+/* Compact home start: date, prompt, one-row thought chips, one sample. */
 .home-screen{
   padding-top:calc(env(safe-area-inset-top) + 18px) !important;
 }
@@ -1289,9 +1289,18 @@ svg{display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:
   display:none !important;
 }
 .fixed-category-grid{
-  display:grid !important;
-  grid-template-columns:repeat(6,minmax(0,1fr)) !important;
+  display:flex !important;
   gap:8px !important;
+  align-items:center !important;
+  overflow-x:auto !important;
+  overflow-y:hidden !important;
+  padding:1px 2px 3px !important;
+  scroll-snap-type:x proximity;
+  scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;
+}
+.fixed-category-grid::-webkit-scrollbar{
+  display:none;
 }
 .category-chip,
 .category-chip:nth-child(-n+3),
@@ -1302,26 +1311,41 @@ svg{display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:
 }
 .category-chip:nth-child(1),
 .category-chip:nth-child(2){
-  grid-column:span 3 !important;
+  grid-column:auto !important;
 }
 .category-chip:nth-child(3),
 .category-chip:nth-child(4),
 .category-chip:nth-child(5){
-  grid-column:span 2 !important;
+  grid-column:auto !important;
 }
 .category-chip,
 .category-chip.plain-chip{
-  height:39px !important;
-  padding:0 10px !important;
+  flex:0 0 auto !important;
+  width:auto !important;
+  height:35px !important;
+  padding:0 12px !important;
   flex-direction:row !important;
   gap:6px !important;
-  font-size:14.5px !important;
-  font-weight:620 !important;
-  letter-spacing:-.04em !important;
+  border-color:rgba(208,216,209,.72) !important;
+  background:rgba(255,255,255,.62) !important;
+  box-shadow:none !important;
+  color:#4E5866 !important;
+  font-size:13.5px !important;
+  font-weight:520 !important;
+  letter-spacing:-.025em !important;
+  scroll-snap-align:start;
 }
 .category-chip .category-icon{
-  width:16px !important;
-  height:16px !important;
+  width:15px !important;
+  height:15px !important;
+}
+.category-chip.selected{
+  background:var(--cat-soft) !important;
+  border-color:color-mix(in srgb,var(--cat-color) 24%, #fff) !important;
+  color:var(--cat-color) !important;
+  font-weight:600 !important;
+  transform:none !important;
+  box-shadow:0 3px 10px color-mix(in srgb,var(--cat-color) 7%, transparent) !important;
 }
 .composer-card{
   margin-top:14px !important;
@@ -1348,16 +1372,17 @@ svg{display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:
   }
   .fixed-category-grid{
     gap:7px !important;
+    padding-right:4px !important;
   }
   .category-chip,
   .category-chip.plain-chip{
-    height:38px !important;
-    padding:0 7px !important;
-    font-size:14px !important;
+    height:34px !important;
+    padding:0 11px !important;
+    font-size:13px !important;
     gap:5px !important;
   }
   .category-chip .category-icon{
-    width:15px !important;
-    height:15px !important;
+    width:14px !important;
+    height:14px !important;
   }
 }
