@@ -425,7 +425,6 @@ svg{display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:
   }
 }
 
-
 /* Home v18 — final CTA and chip balance */
 .fixed-category-grid{
   grid-template-columns:1.22fr repeat(4,1fr);
@@ -1479,5 +1478,114 @@ svg{display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:
     bottom:52px !important;
     width:56px !important;
     height:44px !important;
+  }
+}
+
+/* Home final spacing pass: applied after earlier experiments. */
+.today-date{
+  font-size:14px !important;
+  line-height:1.28 !important;
+}
+.home-prompt{
+  margin-top:7px !important;
+  font-size:18.5px !important;
+  line-height:1.34 !important;
+}
+.category-section{
+  margin-top:15px !important;
+}
+.fixed-category-grid{
+  gap:6px !important;
+  padding:1px 1px 2px !important;
+}
+.category-chip,
+.category-chip.plain-chip{
+  height:33px !important;
+  padding:0 10px !important;
+  gap:5px !important;
+  font-size:13.5px !important;
+}
+.category-chip .category-icon{
+  width:14px !important;
+  height:14px !important;
+}
+.composer-card{
+  margin-top:12px !important;
+  min-height:150px !important;
+  padding:16px 16px 14px !important;
+}
+.composer-main{
+  min-height:120px !important;
+  padding-right:70px !important;
+}
+.composer-examples{
+  padding-right:78px !important;
+  gap:5px !important;
+  font-size:15px !important;
+  line-height:1.46 !important;
+}
+.example-line{
+  gap:6px !important;
+}
+.composer-card-friend{
+  right:16px !important;
+  bottom:55px !important;
+  width:54px !important;
+  height:42px !important;
+}
+.composer-card-cta{
+  right:16px !important;
+  bottom:13px !important;
+  height:34px !important;
+  padding:0 12px !important;
+  font-size:14.5px !important;
+}
+.recent-section{
+  margin-top:22px !important;
+}
+.section-head{
+  margin-bottom:13px !important;
+}
+.section-head h2{
+  font-size:17px !important;
+}
+
+@media(max-width:365px){
+  .home-prompt{
+    font-size:18px !important;
+  }
+  .category-section{
+    margin-top:14px !important;
+  }
+  .fixed-category-grid{
+    gap:5px !important;
+  }
+  .category-chip,
+  .category-chip.plain-chip{
+    height:32px !important;
+    padding:0 9px !important;
+    font-size:13px !important;
+  }
+  .composer-card{
+    min-height:146px !important;
+  }
+  .composer-main{
+    min-height:116px !important;
+    padding-right:66px !important;
+  }
+  .composer-examples{
+    padding-right:70px !important;
+    font-size:14.5px !important;
+  }
+  .composer-card-friend{
+    right:14px !important;
+    bottom:54px !important;
+    width:51px !important;
+    height:40px !important;
+  }
+  .composer-card-cta{
+    right:13px !important;
+    height:33px !important;
+    font-size:14px !important;
   }
 }
